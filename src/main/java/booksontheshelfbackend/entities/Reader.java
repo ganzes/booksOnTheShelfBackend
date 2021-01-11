@@ -1,4 +1,4 @@
-package booksontheshelfbackend.entitys;
+package booksontheshelfbackend.entities;
 
 import javax.persistence.*;
 
