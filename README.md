@@ -4,7 +4,7 @@ Original web-based application for reading purposes created especially for all t
 # General purposes:
 Adding new books and generating new content
 
-#Technology stack and tools:
+# Technology stack and tools:
 Database for deployment: PostgreSQL
 Programming language: Java 11
 Build automation tool: Maven
@@ -17,4 +17,3 @@ Framework: Spring
 CircleCi
 Figma
 Slack
-
