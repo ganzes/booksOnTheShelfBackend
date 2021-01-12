@@ -17,7 +17,7 @@ public class Book {
     private String title;
 
     @Column(name = "withdrawn")
-    private boolean wthdrawn;
+    private boolean withdrawn;
 
     public Book() {
     }
@@ -34,8 +34,8 @@ public class Book {
         return title;
     }
 
-    public boolean isWthdrawn() {
-        return wthdrawn;
+    public boolean isWithdrawn() {
+        return withdrawn;
     }
 
     public void setId(long id) {
@@ -50,7 +50,7 @@ public class Book {
         this.title = title;
     }
 
-    public void setWthdrawn(boolean wthdrawn) {
-        this.wthdrawn = wthdrawn;
+    public void setWithdrawn(boolean withdrawn) {
+        this.withdrawn = withdrawn;
     }
 }
