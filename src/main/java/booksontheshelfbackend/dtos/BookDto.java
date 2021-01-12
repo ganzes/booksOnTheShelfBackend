@@ -5,16 +5,16 @@ public class BookDto {
     private long id;
     private String author;
     private String title;
-    private boolean wthdrawn;
+    private boolean withdrawn;
 
     public BookDto() {
     }
 
-    public BookDto(long id, String author, String title, boolean wthdrawn) {
+    public BookDto(long id, String author, String title, boolean withdrawn) {
         this.id = id;
         this.author = author;
         this.title = title;
-        this.wthdrawn = wthdrawn;
+        this.withdrawn = withdrawn;
     }
 
     public long getId() {
@@ -29,8 +29,8 @@ public class BookDto {
         return title;
     }
 
-    public boolean isWthdrawn() {
-        return wthdrawn;
+    public boolean isWithdrawn() {
+        return withdrawn;
     }
 
     public void setId(long id) {
@@ -45,7 +45,7 @@ public class BookDto {
         this.title = title;
     }
 
-    public void setWthdrawn(boolean wthdrawn) {
-        this.wthdrawn = wthdrawn;
+    public void setWithdrawn(boolean withdrawn) {
+        this.withdrawn = withdrawn;
     }
 }
