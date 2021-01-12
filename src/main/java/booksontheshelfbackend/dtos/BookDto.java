@@ -1,25 +1,20 @@
-package booksontheshelfbackend.entities;
+package booksontheshelfbackend.dtos;
 
-import javax.persistence.*;
+public class BookDto {
 
-@Entity(name = "book")
-public class Book {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
-
-    @Column(name = "author")
     private String author;
-
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "withdrawn")
     private boolean wthdrawn;
 
-    public Book() {
+    public BookDto() {
+    }
+
+    public BookDto(long id, String author, String title, boolean wthdrawn) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.wthdrawn = wthdrawn;
     }
 
     public long getId() {
