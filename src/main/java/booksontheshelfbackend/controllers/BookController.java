@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/botsab")
@@ -21,10 +23,15 @@ public class BookController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
-    @PostMapping(value = "createBook")
+    @PostMapping(value = "/createBook")
     private void createBook(@RequestBody BookDto bookDto) {
         logger.info("Started createBook in BookController.");
         bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
+    }
+
+    @GetMapping(value = "/getAllBooks")
+    private List<BookDto> getAllBooks(){
+        return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
     @DeleteMapping(value = "/deleteBook")
