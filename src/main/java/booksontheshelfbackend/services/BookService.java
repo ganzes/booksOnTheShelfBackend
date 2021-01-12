@@ -14,32 +14,32 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    private List<Book> getAllBooks(){
+    private Book createBook(Book book) {
+        Optional<Book> optionalBook = bookRepository.findById(book.getId());
+        if (!optionalBook.isPresent()) {
+            return bookRepository.save(book);
+        }
+        return book;
+    }
+
+    private List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    private Book createBook(Book book){
+    private Book findBookById(Long bookId) {
+        return bookRepository.findById(bookId).orElseThrow();
+    }
+
+    private Book updateBook(Book book) {
         Optional<Book> optionalBook = bookRepository.findById(book.getId());
-        if (!optionalBook.isPresent()){
+        if (optionalBook.isPresent()) {
             return bookRepository.save(book);
         }
         return book;
     }
 
-    private Book updateBook(Book book){
-        Optional<Book> optionalBook = bookRepository.findById(book.getId());
-        if (optionalBook.isPresent()){
-            return bookRepository.save(book);
-        }
-        return book;
-    }
-
-    private void deleteBook(Long id){
+    private void deleteBook(Long id) {
         Book deleteBook = bookRepository.findById(id).orElseThrow();
         bookRepository.delete(deleteBook);
-    }
-
-    private Book findBookById(Long bookId){
-        return bookRepository.findById(bookId).orElseThrow();
     }
 }
