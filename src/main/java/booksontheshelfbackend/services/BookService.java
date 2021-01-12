@@ -26,6 +26,14 @@ public class BookService {
         return book;
     }
 
+    private Book updateBook(Book book){
+        Optional<Book> optionalBook = bookRepository.findById(book.getId());
+        if (optionalBook.isPresent()){
+            return bookRepository.save(book);
+        }
+        return book;
+    }
+
     private void deleteBook(Long id){
         Book deleteBook = bookRepository.findById(id).orElseThrow();
         bookRepository.delete(deleteBook);
