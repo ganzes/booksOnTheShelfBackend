@@ -36,7 +36,7 @@ public class ReaderController {
     }
 
     @GetMapping(value = "/getAllReaders")
-    private List<ReaderDto> getAllReaders(){
+    private List<ReaderDto> getAllReaders() {
         return readerMapper.mapToReaderDtoList(readerService.getAllReaders());
     }
 

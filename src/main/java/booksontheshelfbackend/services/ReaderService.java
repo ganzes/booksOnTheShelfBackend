@@ -1,6 +1,5 @@
 package booksontheshelfbackend.services;
 
-import booksontheshelfbackend.entities.Book;
 import booksontheshelfbackend.entities.Reader;
 import booksontheshelfbackend.repositories.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
