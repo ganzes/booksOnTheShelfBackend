@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class BookMapper {
 
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     public Book mapToBook (final BookDto bookDto){
         return modelMapper.map(bookDto, Book.class);

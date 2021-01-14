@@ -29,14 +29,25 @@ public class BookController {
         bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
     }
 
+    @PutMapping(value = "/updateBook")
+    private BookDto updateBook(@RequestBody BookDto bookDto) {
+        logger.info("Started updateBook in BookController.");
+        return bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto)));
+    }
+
     @GetMapping(value = "/getAllBooks")
     private List<BookDto> getAllBooks(){
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
     @DeleteMapping(value = "/deleteBook")
-    public void deleteBook(@RequestParam Long bookId) {
+    private void deleteBook(@RequestParam Long bookId) {
         logger.info("Started deleteBook in BookController.");
         bookService.deleteBook(bookId);
+    }
+
+    @PatchMapping(value = "/withdrawnBook")
+    private BookDto withdrawnBook (@RequestBody BookDto bookDto){
+        return bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto)));
     }
 }
