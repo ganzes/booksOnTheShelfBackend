@@ -1,5 +1,6 @@
 package booksontheshelfbackend.services;
 
+import booksontheshelfbackend.entities.Book;
 import booksontheshelfbackend.entities.Reader;
 import booksontheshelfbackend.repositories.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ public class ReaderService {
     @Autowired
     private ReaderRepository readerRepository;
 
-    private List<Reader> getAllReader() {
+    public List<Reader> getAllReaders() {
         return readerRepository.findAll();
     }
 
-    private Reader createReader(Reader reader) {
+    public Reader createReader(Reader reader) {
         Optional<Reader> optionalReader = readerRepository.findById(reader.getId());
         if (!optionalReader.isPresent()) {
             return readerRepository.save(reader);
@@ -26,7 +27,7 @@ public class ReaderService {
         return reader;
     }
 
-    private Reader updateReader(Reader reader) {
+    public Reader updateReader(Reader reader) {
         Optional<Reader> optionalReader = readerRepository.findById(reader.getId());
         if (optionalReader.isPresent()) {
             return readerRepository.save(reader);
@@ -38,8 +39,9 @@ public class ReaderService {
         return readerRepository.findById(reader.getId()).orElseThrow();
     }
 
-    private void deleteReader(Reader reader) {
-        readerRepository.deleteById(reader.getId());
+    public void deleteReader(Long id) {
+        Reader deleteReader = readerRepository.findById(id).orElseThrow();
+        readerRepository.delete(deleteReader);
     }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @Transactional
+@Repository
 public interface ReaderRepository extends JpaRepository<Reader, Long> {
 
     @Override
