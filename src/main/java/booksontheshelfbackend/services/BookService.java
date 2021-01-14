@@ -43,11 +43,12 @@ public class BookService {
         bookRepository.delete(deleteBook);
     }
 
-    public Book withdrawnBook (Book book){
-        if (!bookRepository.existsById(book.getId())){
+    public Book withdrawnBook(Book book) {
+        if (!bookRepository.existsById(book.getId())) {
             return bookRepository.save(book);
         }
-        bookRepository.findById(book.getId()).ifPresent(withdrawn -> book.setWithdrawn(!withdrawn.isWithdrawn()));
+        bookRepository.findById(book.getId()).ifPresent
+                (withdrawn -> book.setWithdrawn(!withdrawn.isWithdrawn()));
         return book;
     }
 }

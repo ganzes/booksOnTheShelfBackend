@@ -36,7 +36,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/getAllBooks")
-    private List<BookDto> getAllBooks(){
+    private List<BookDto> getAllBooks() {
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
@@ -47,7 +47,10 @@ public class BookController {
     }
 
     @PatchMapping(value = "/withdrawnBook")
-    private BookDto withdrawnBook (@RequestBody BookDto bookDto){
+    private BookDto withdrawnBook(@RequestParam Long bookId) {
+        logger.info("Started withdrawnBook in BookController.");
+
+        BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(bookId));
         return bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto)));
     }
 }
