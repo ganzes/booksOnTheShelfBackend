@@ -1,18 +1,22 @@
 package booksontheshelfbackend.dtos;
 
+import java.time.LocalDate;
+
 public class ReaderDto {
 
     private long id;
     private String name;
     private long pages;
+    private LocalDate date;
 
     public ReaderDto() {
     }
 
-    public ReaderDto(long id, String name, long pages) {
+    public ReaderDto(long id, String name, long pages, LocalDate date) {
         this.id = id;
         this.name = name;
         this.pages = pages;
+        this.date = date;
     }
 
     public long getId() {
@@ -27,6 +31,10 @@ public class ReaderDto {
         return pages;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -37,5 +45,9 @@ public class ReaderDto {
 
     public void setPages(long pages) {
         this.pages = pages;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
