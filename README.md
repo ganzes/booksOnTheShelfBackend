@@ -4,6 +4,9 @@
 # General purposes:
 - Adding new books and generating new content
 
+# Frontend repository:
+https://github.com/zh-betina/booksOnTheShelfFrontend
+
 # Technology stack and tools:
 - Database for deployment: PostgreSQL
 - Programming language: Java 11
