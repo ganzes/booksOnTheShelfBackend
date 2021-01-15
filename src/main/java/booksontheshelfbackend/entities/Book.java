@@ -1,5 +1,7 @@
 package booksontheshelfbackend.entities;
 
+import booksontheshelfbackend.enums.BookStatusEnum;
+
 import javax.persistence.*;
 
 @Entity(name = "book")
@@ -22,18 +24,23 @@ public class Book {
     @Column(name = "comment")
     private String comment;
 
+    @Enumerated(EnumType.STRING)
+    private BookStatusEnum bookStatusEnum;
+
     @Column(name = "withdrawn")
     private boolean withdrawn;
 
     public Book() {
     }
 
-    public Book(long id, String author, String title, long pages, String comment, boolean withdrawn) {
+    public Book(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
+                boolean withdrawn) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pages = pages;
         this.comment = comment;
+        this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
     }
 
@@ -55,6 +62,10 @@ public class Book {
 
     public String getComment() {
         return comment;
+    }
+
+    public BookStatusEnum getBookStatusEnum() {
+        return bookStatusEnum;
     }
 
     public boolean isWithdrawn() {
@@ -79,6 +90,10 @@ public class Book {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setBookStatusEnum(BookStatusEnum bookStatusEnum) {
+        this.bookStatusEnum = bookStatusEnum;
     }
 
     public void setWithdrawn(boolean withdrawn) {

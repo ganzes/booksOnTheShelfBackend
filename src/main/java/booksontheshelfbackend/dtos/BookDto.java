@@ -1,5 +1,7 @@
 package booksontheshelfbackend.dtos;
 
+import booksontheshelfbackend.enums.BookStatusEnum;
+
 public class BookDto {
 
     private long id;
@@ -7,17 +9,20 @@ public class BookDto {
     private String title;
     private long pages;
     private String comment;
+    private BookStatusEnum bookStatusEnum;
     private boolean withdrawn;
 
     public BookDto() {
     }
 
-    public BookDto(long id, String author, String title, long pages, String comment, boolean withdrawn) {
+    public BookDto(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
+                   boolean withdrawn) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pages = pages;
         this.comment = comment;
+        this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
     }
 
@@ -39,6 +44,10 @@ public class BookDto {
 
     public String getComment() {
         return comment;
+    }
+
+    public BookStatusEnum getBookStatusEnum() {
+        return bookStatusEnum;
     }
 
     public boolean isWithdrawn() {
@@ -63,6 +72,10 @@ public class BookDto {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setBookStatusEnum(BookStatusEnum bookStatusEnum) {
+        this.bookStatusEnum = bookStatusEnum;
     }
 
     public void setWithdrawn(boolean withdrawn) {
