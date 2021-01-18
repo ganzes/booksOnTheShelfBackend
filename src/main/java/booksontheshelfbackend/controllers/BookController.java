@@ -35,6 +35,12 @@ public class BookController {
         return bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto)));
     }
 
+    @GetMapping(value = "/book{id}")
+    private BookDto getBook(@RequestParam Long id){
+        logger.info("Started getBook in BookController.");
+        return bookMapper.mapToBookDto(bookService.findBookById(id));
+    }
+
     @GetMapping(value = "/books")
     private List<BookDto> getAllBooks() {
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());

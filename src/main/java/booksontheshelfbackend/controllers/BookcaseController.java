@@ -1,5 +1,6 @@
 package booksontheshelfbackend.controllers;
 
+import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.dtos.BookcaseDto;
 import booksontheshelfbackend.mappers.BookcaseMapper;
 import booksontheshelfbackend.services.BookcaseService;
@@ -39,6 +40,12 @@ public class BookcaseController {
     @GetMapping(value = "/bookcases")
     private List<BookcaseDto> getAllBookcases() {
         return bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases());
+    }
+
+    @GetMapping(value = "/bookcase{id}")
+    private BookcaseDto getBookcase(@RequestParam Long id){
+        logger.info("Started getBookcase in BookcaseController.");
+        return bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id));
     }
 
     @DeleteMapping(value = "/bookcase/{id}")

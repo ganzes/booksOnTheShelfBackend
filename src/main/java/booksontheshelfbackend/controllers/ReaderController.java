@@ -1,5 +1,6 @@
 package booksontheshelfbackend.controllers;
 
+import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.dtos.ReaderDto;
 import booksontheshelfbackend.mappers.ReaderMapper;
 import booksontheshelfbackend.services.ReaderService;
@@ -38,6 +39,12 @@ public class ReaderController {
     @GetMapping(value = "/readers")
     private List<ReaderDto> getAllReaders() {
         return readerMapper.mapToReaderDtoList(readerService.getAllReaders());
+    }
+
+    @GetMapping(value = "/reader{id}")
+    private ReaderDto getReader(@RequestParam Long id){
+        logger.info("Started getReader in BookController.");
+        return readerMapper.mapToReaderDto(readerService.findReaderById(id));
     }
 
     @DeleteMapping(value = "/reader{id}")

@@ -34,8 +34,8 @@ public class ReaderService {
         return reader;
     }
 
-    private Reader findReaderById(Reader reader) {
-        return readerRepository.findById(reader.getId()).orElseThrow();
+    public Reader findReaderById(Long id) {
+        return readerRepository.findById(id).orElseThrow();
     }
 
     public void deleteReader(Long id) {
