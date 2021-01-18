@@ -1,6 +1,5 @@
 package booksontheshelfbackend.controllers;
 
-import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.dtos.BookcaseDto;
 import booksontheshelfbackend.mappers.BookcaseMapper;
 import booksontheshelfbackend.services.BookcaseService;
