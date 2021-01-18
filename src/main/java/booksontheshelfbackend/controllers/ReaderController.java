@@ -23,26 +23,26 @@ public class ReaderController {
 
     private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
 
-    @PostMapping(value = "/createReader")
+    @PostMapping(value = "/reader")
     private void createReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started createReader in ReaderController.");
         readerMapper.mapToReaderDto(readerService.createReader(readerMapper.mapToReader(readerDto)));
     }
 
-    @PutMapping(value = "/updateReader")
+    @PutMapping(value = "/reader")
     private ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started updateReader in ReaderController.");
         return readerMapper.mapToReaderDto(readerService.updateReader(readerMapper.mapToReader(readerDto)));
     }
 
-    @GetMapping(value = "/getAllReaders")
+    @GetMapping(value = "/readers")
     private List<ReaderDto> getAllReaders() {
         return readerMapper.mapToReaderDtoList(readerService.getAllReaders());
     }
 
-    @DeleteMapping(value = "/deleteReader")
-    private void deleteReader(@RequestParam Long readerId) {
+    @DeleteMapping(value = "/reader{id}")
+    private void deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
-        readerService.deleteReader(readerId);
+        readerService.deleteReader(id);
     }
 }
