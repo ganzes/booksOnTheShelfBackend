@@ -49,6 +49,6 @@ public class BookService {
         }
         bookRepository.findById(book.getId()).ifPresent
                 (withdrawn -> book.setWithdrawn(!withdrawn.isWithdrawn()));
-        return book;
+        return bookRepository.save(book);
     }
 }
