@@ -1,5 +1,7 @@
 package booksontheshelfbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class ReaderDto {
@@ -7,6 +9,7 @@ public class ReaderDto {
     private long id;
     private String name;
     private long pages;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     public ReaderDto() {
