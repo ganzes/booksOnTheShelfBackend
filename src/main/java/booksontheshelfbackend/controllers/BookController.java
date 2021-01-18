@@ -43,6 +43,7 @@ public class BookController {
 
     @GetMapping(value = "/books")
     private List<BookDto> getAllBooks() {
+        logger.info("Started getAllBooks in BookController.");
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 

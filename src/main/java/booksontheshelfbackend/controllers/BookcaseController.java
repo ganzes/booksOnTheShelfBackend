@@ -39,11 +39,12 @@ public class BookcaseController {
 
     @GetMapping(value = "/bookcases")
     private List<BookcaseDto> getAllBookcases() {
+        logger.info("Started getAllBookcases in BookcaseController.");
         return bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases());
     }
 
     @GetMapping(value = "/bookcase{id}")
-    private BookcaseDto getBookcase(@RequestParam Long id){
+    private BookcaseDto getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id));
     }

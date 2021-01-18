@@ -38,6 +38,7 @@ public class ReaderController {
 
     @GetMapping(value = "/readers")
     private List<ReaderDto> getAllReaders() {
+        logger.info("Started getAllReaders in ReaderController.");
         return readerMapper.mapToReaderDtoList(readerService.getAllReaders());
     }
 
