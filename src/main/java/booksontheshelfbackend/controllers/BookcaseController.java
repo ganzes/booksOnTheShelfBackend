@@ -54,14 +54,14 @@ public class BookcaseController {
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id));
     }
 
-    @DeleteMapping(value = "/bookcase/{id}")
+    @DeleteMapping(value = "/bookcase{id}")
     private void deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
         bookcaseService.deleteBookcase(id);
     }
 
-    @PutMapping(value = "/bookcase{id}")
-    private void addBooksToBookcase(@RequestBody Set<BookDto> bookDtoSet, @RequestParam long id){
+    @PutMapping(value = "/bookcasebook{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private void addBooksToBookcase(@RequestParam long id, @RequestBody Set<BookDto> bookDtoSet){
         logger.info("Started addBooksToBookcase in BookcaseController.");
         bookcaseService.addBooksToBookcase(bookMapper.mapToBookSet(bookDtoSet), id);
     }

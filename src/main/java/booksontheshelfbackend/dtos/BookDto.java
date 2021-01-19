@@ -12,14 +12,12 @@ public class BookDto {
     private String comment;
     private BookStatusEnum bookStatusEnum;
     private boolean withdrawn;
-    private Bookcase bookcase;
-
 
     public BookDto() {
     }
 
     public BookDto(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
-                   boolean withdrawn, Bookcase bookcase) {
+                   boolean withdrawn) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -27,7 +25,6 @@ public class BookDto {
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
-        this.bookcase = bookcase;
     }
 
     public long getId() {
@@ -58,10 +55,6 @@ public class BookDto {
         return withdrawn;
     }
 
-    public Bookcase getBookcase() {
-        return bookcase;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -90,7 +83,4 @@ public class BookDto {
         this.withdrawn = withdrawn;
     }
 
-    public void setBookcase(Bookcase bookcase) {
-        this.bookcase = bookcase;
-    }
 }
