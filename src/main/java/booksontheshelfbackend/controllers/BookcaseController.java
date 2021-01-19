@@ -1,6 +1,8 @@
 package booksontheshelfbackend.controllers;
 
+import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.dtos.BookcaseDto;
+import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.mappers.BookcaseMapper;
 import booksontheshelfbackend.services.BookcaseService;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -21,6 +24,9 @@ public class BookcaseController {
 
     @Autowired
     private BookcaseService bookcaseService;
+
+    @Autowired
+    private BookMapper bookMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
 
@@ -53,4 +59,11 @@ public class BookcaseController {
         logger.info("Started deleteBookcase in BookcaseController.");
         bookcaseService.deleteBookcase(id);
     }
+
+    @PutMapping(value = "/bookcase{id}")
+    private void addBooksToBookcase(@RequestBody Set<BookDto> bookDtoSet, @RequestParam long id){
+        logger.info("Started addBooksToBookcase in BookcaseController.");
+        bookcaseService.addBooksToBookcase(bookMapper.mapToBookSet(bookDtoSet), id);
+    }
+
 }

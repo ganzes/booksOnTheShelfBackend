@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -33,5 +34,17 @@ public class BookMapper {
         return bookList.stream()
                 .map(this::mapToBookDto)
                 .collect(Collectors.toList());
+    }
+
+    public Set<Book> mapToBookSet (Set<BookDto> bookDtoSet){
+        return bookDtoSet.stream()
+                .map(this::mapToBook)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<BookDto> mapToBookDtoSet (Set<Book> bookSet){
+        return bookSet.stream()
+                .map(this::mapToBookDto)
+                .collect(Collectors.toSet());
     }
 }

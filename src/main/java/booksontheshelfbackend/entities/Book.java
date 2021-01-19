@@ -30,11 +30,15 @@ public class Book {
     @Column(name = "withdrawn")
     private boolean withdrawn;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bookcase_id")
+    private Bookcase bookcase;
+
     public Book() {
     }
 
     public Book(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
-                boolean withdrawn) {
+                boolean withdrawn, Bookcase bookcase) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -42,6 +46,7 @@ public class Book {
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
+        this.bookcase = bookcase;
     }
 
     public long getId() {
@@ -72,6 +77,10 @@ public class Book {
         return withdrawn;
     }
 
+    public Bookcase getBookcase() {
+        return bookcase;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -98,5 +107,9 @@ public class Book {
 
     public void setWithdrawn(boolean withdrawn) {
         this.withdrawn = withdrawn;
+    }
+
+    public void setBookcase(Bookcase bookcase) {
+        this.bookcase = bookcase;
     }
 }

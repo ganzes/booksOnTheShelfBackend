@@ -1,5 +1,6 @@
 package booksontheshelfbackend.services;
 
+import booksontheshelfbackend.entities.Book;
 import booksontheshelfbackend.entities.Bookcase;
 import booksontheshelfbackend.repositories.BookcaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BookcaseService {
@@ -41,5 +43,13 @@ public class BookcaseService {
     public void deleteBookcase(Long id) {
         Bookcase deleteBookcase = bookcaseRepository.findById(id).orElseThrow();
         bookcaseRepository.delete(deleteBookcase);
+    }
+
+    public void addBooksToBookcase(final Set<Book> bookSet, final Long id){
+        Bookcase updateBookcase = bookcaseRepository.findById(id).orElseThrow();
+        for (Book book : bookSet) {
+            updateBookcase.getBooks().add(book);
+        }
+        bookcaseRepository.save(updateBookcase);
     }
 }
