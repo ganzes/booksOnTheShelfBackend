@@ -13,10 +13,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>BooksOnTheShelfBackend</name>
     <description>Books On The Shelf - backend</description>
-
-    <properties>
+    <!--
+        <properties>
         <java.version>11</java.version>
-    </properties>
+    </properties>-->
 
     <dependencies>
         <dependency>
