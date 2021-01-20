@@ -60,10 +60,16 @@ public class BookcaseController {
         bookcaseService.deleteBookcase(id);
     }
 
-    @PutMapping(value = "/bookcasebook{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+   /* @PutMapping(value = "/bookcasebook{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     private void addBooksToBookcase(@RequestParam long id, @RequestBody Set<BookDto> bookDtoSet){
         logger.info("Started addBooksToBookcase in BookcaseController.");
         bookcaseService.addBooksToBookcase(bookMapper.mapToBookSet(bookDtoSet), id);
+    }*/
+
+    @PutMapping(value = "/bookcasebook{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private void addBookToBookcase(@RequestParam long id, @RequestParam long bookId){
+        logger.info("Started addBookToBookcase in BookcaseController.");
+        bookcaseService.addBookToBookcase(id, bookId);
     }
 
 }

@@ -34,6 +34,21 @@ public class Book {
     @JoinColumn(name = "bookcase_id")
     private Bookcase bookcase;
 
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", pages=" + pages +
+                ", comment='" + comment + '\'' +
+                ", bookStatusEnum=" + bookStatusEnum +
+                ", withdrawn=" + withdrawn +
+                ", bookcase=" + bookcase +
+                '}';
+    }
+
     public Book() {
     }
 
