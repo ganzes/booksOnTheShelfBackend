@@ -63,16 +63,9 @@ public class BookcaseService {
         System.out.println("PULKA KURDE " + updateBookcase.getTag());
 
         Book addBook = bookRepository.findById(bookId).get();
-        System.out.println("ksiazka kurde " + addBook.getAuthor());
+        addBook.setBookcase(updateBookcase);
 
-        Set<Book> bookHashSet = new HashSet<>();
-        bookHashSet.add(addBook);
-        //bookHashSet.add(new Book());
-        System.out.println("CALOSC KURDE " + bookHashSet);
-
-        updateBookcase.setBooks(bookHashSet);
-        updateBookcase.getBooks();
-
+        bookRepository.save(addBook);
         return bookcaseRepository.save(updateBookcase);
     }
 }

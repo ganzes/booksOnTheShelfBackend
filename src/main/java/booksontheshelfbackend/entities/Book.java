@@ -1,6 +1,7 @@
 package booksontheshelfbackend.entities;
 
 import booksontheshelfbackend.enums.BookStatusEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
@@ -32,22 +33,8 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bookcase_id")
+    @JsonBackReference
     private Bookcase bookcase;
-
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", pages=" + pages +
-                ", comment='" + comment + '\'' +
-                ", bookStatusEnum=" + bookStatusEnum +
-                ", withdrawn=" + withdrawn +
-                ", bookcase=" + bookcase +
-                '}';
-    }
 
     public Book() {
     }

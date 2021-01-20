@@ -1,5 +1,7 @@
 package booksontheshelfbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class Bookcase {
     private String tag;
 
     @OneToMany(mappedBy = "bookcase", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<Book> books;
 
     public Bookcase() {
