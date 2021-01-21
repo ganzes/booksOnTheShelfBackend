@@ -60,4 +60,9 @@ public class BookController {
         BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
         return bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto)));
     }
+
+    @GetMapping(value = "/booksc")
+    private Long countBooks(){
+        return bookService.countBooks();
+    }
 }

@@ -51,4 +51,8 @@ public class BookService {
                 (withdrawn -> book.setWithdrawn(!withdrawn.isWithdrawn()));
         return bookRepository.save(book);
     }
+
+    public Long countBooks(){
+        return bookRepository.count();
+    }
 }
