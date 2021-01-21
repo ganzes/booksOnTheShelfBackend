@@ -1,8 +1,6 @@
 package booksontheshelfbackend.controllers;
 
-import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.dtos.BookcaseDto;
-import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.mappers.BookcaseMapper;
 import booksontheshelfbackend.services.BookcaseService;
 import org.slf4j.Logger;
@@ -12,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -25,38 +22,40 @@ public class BookcaseController {
     @Autowired
     private BookcaseService bookcaseService;
 
-    @Autowired
-    private BookMapper bookMapper;
-
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE)
     private void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started createBookcase in BookcaseController.");
+
         bookcaseMapper.mapToBookcaseDto(bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
     }
 
     @PutMapping(value = "/bookcase")
     private BookcaseDto updateBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started updateBookcase in BookcaseController.");
+
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
     }
 
     @GetMapping(value = "/bookcases")
     private List<BookcaseDto> getAllBookcases() {
         logger.info("Started getAllBookcases in BookcaseController.");
+
         return bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases());
     }
 
     @GetMapping(value = "/bookcase{id}")
     private BookcaseDto getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
+
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id));
     }
 
     @DeleteMapping(value = "/bookcase{id}")
     private void deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
+
         bookcaseService.deleteBookcase(id);
     }
 
@@ -67,9 +66,18 @@ public class BookcaseController {
     }*/
 
     @PutMapping(value = "/bookcasebook{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private void addBookToBookcase(@RequestParam long id, @RequestParam long bookId){
+    private void addBookToBookcase(@RequestParam long id, @RequestParam long bookId) {
         logger.info("Started addBookToBookcase in BookcaseController.");
+
         bookcaseService.addBookToBookcase(id, bookId);
     }
+
+    @GetMapping(value = "/booksinbookcase")
+    private Long countBooksInBookcase(@RequestParam Long id) {
+        logger.info("Started countBooksInBookcase in BookcaseController.");
+
+        return bookcaseService.countBooksInBookcase(id);
+    }
+
 
 }

@@ -60,12 +60,16 @@ public class BookcaseService {
 
     public Bookcase addBookToBookcase(final Long id, final Long bookId){
         Bookcase updateBookcase = bookcaseRepository.findById(id).orElseThrow();
-        System.out.println("PULKA KURDE " + updateBookcase.getTag());
-
         Book addBook = bookRepository.findById(bookId).get();
         addBook.setBookcase(updateBookcase);
-
         bookRepository.save(addBook);
+
         return bookcaseRepository.save(updateBookcase);
+    }
+
+    public Long countBooksInBookcase(final Long id){
+        Bookcase countBooks = bookcaseRepository.findById(id).orElseThrow();
+
+        return (long) countBooks.getBooks().size();
     }
 }
