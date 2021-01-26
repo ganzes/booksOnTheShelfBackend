@@ -7,9 +7,6 @@ Original web-based application allowing readers to change their books status, re
 - catalog books
 - tracking readers reading habits
 
-# Frontend repository:
-https://github.com/zh-betina/booksOnTheShelfFrontend
-
 # Technology stack and tools:
 **Back-End:**
 - Database for deployment: PostgreSQL
