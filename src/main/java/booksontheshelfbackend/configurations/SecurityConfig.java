@@ -1,13 +1,11 @@
 package booksontheshelfbackend.configurations;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
 
-    @Override
+/*    @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.antMatcher("/**").authorizeRequests()
@@ -15,5 +13,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();
-    }
+    }*/
 }
