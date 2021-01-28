@@ -1,6 +1,7 @@
 package booksontheshelfbackend.controllers;
 
 import booksontheshelfbackend.dtos.ReaderDto;
+import booksontheshelfbackend.entities.Reader;
 import booksontheshelfbackend.mappers.ReaderMapper;
 import booksontheshelfbackend.services.ReaderService;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -51,5 +53,12 @@ public class ReaderController {
     private void deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
         readerService.deleteReader(id);
+    }
+
+    @PatchMapping(value = "/reader{id&numberOfPages}")
+    private ReaderDto addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages){
+        logger.info("Started addPagesToReader in ReaderController.");
+        return readerMapper.mapToReaderDto(readerService.addPagesToReader(id, numberOfPages));
+
     }
 }
