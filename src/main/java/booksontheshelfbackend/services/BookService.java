@@ -1,6 +1,7 @@
 package booksontheshelfbackend.services;
 
 import booksontheshelfbackend.entities.Book;
+import booksontheshelfbackend.enums.BookStatusEnum;
 import booksontheshelfbackend.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,25 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Long countBooks(){
+    public Long countBooks() {
         return bookRepository.count();
+    }
+
+    public Book changeBookStatus(Book book, Long status) {
+        if (!bookRepository.existsById(book.getId())) {
+            return bookRepository.save(book);
+        }
+
+        Book updateBook = bookRepository.findById(book.getId()).orElseThrow();
+
+        if (status == 1) {
+            updateBook.setBookStatusEnum(BookStatusEnum.TOREAD);
+        } else if (status == 2) {
+            updateBook.setBookStatusEnum(BookStatusEnum.DONEREAD);
+        } else if (status == 3) {
+            updateBook.setBookStatusEnum(BookStatusEnum.READING);
+        }
+
+        return bookRepository.save(updateBook);
     }
 }

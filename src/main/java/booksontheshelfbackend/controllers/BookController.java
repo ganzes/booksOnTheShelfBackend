@@ -73,4 +73,12 @@ public class BookController {
 
         return bookService.countBooks();
     }
+
+    @PatchMapping(value = "/changebookstatus{id&status}")
+    private BookDto changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
+        logger.info("Started changeBookStatus in BookController.");
+        BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
+
+        return bookMapper.mapToBookDto(bookService.changeBookStatus(bookMapper.mapToBook(bookDto), status));
+    }
 }
