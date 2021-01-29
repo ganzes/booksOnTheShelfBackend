@@ -19,6 +19,8 @@ public interface BookcaseRepository extends JpaRepository<Bookcase, Long> {
     @Override
     Optional<Bookcase> findById(Long id);
 
+    boolean existsById(Long id);
+
     @Override
     void deleteById(Long id);
 }

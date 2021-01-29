@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -28,18 +29,49 @@ public class BookcaseController {
     private void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started createBookcase in BookcaseController.");
 
-        bookcaseMapper.mapToBookcaseDto(bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+        if (bookcaseDto.getId() == 0){
+            logger.info("0 createBookcase in BookcaseController.");
+            bookcaseMapper.mapToBookcaseDto(bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+        }
+
+        try {
+            bookcaseMapper.mapToBookcaseDto(bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+            logger.info("Succeed createBookcase in BookcaseController.");
+        } catch (HttpServerErrorException e) {
+            logger.error("HttpServerErrorException " + e);
+            logger.warn("Failure createBookcase in BookcaseController.");
+        }
+        logger.info("Ended createBookcase in BookcaseController.");
     }
 
     @PutMapping(value = "/bookcase")
     private BookcaseDto updateBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started updateBookcase in BookcaseController.");
+        if (bookcaseDto.getId() == 0){
+            logger.info("0 updateBookcase in BookcaseController.");
+            return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+        } else if(bookcaseService.existById(bookcaseDto.getId())){
+            logger.info("EXIST");
+            try {
+                logger.info("Succeed updateBookcase in BookcaseController.");
+                return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+            } catch (HttpServerErrorException e) {
+                logger.error("Exception " + e);
+                logger.warn("Failure updateBookcase in BookcaseController.");
+            }
+        } else if (!bookcaseService.existById(bookcaseDto.getId())){
+            logger.info("NOT EXIST");
+            logger.warn("Failure updateBookcase in BookcaseController.");
+            return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
+        }
 
+        logger.info("Ended updateBookcase in BookcaseController.");
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
     }
 
     @GetMapping(value = "/bookcases")
     private List<BookcaseDto> getAllBookcases() {
+
         logger.info("Started getAllBookcases in BookcaseController.");
 
         return bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases());
