@@ -6,7 +6,11 @@ import booksontheshelfbackend.services.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,61 +28,101 @@ public class BookController {
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @PostMapping(value = "/book")
-    private void createBook(@RequestBody BookDto bookDto) {
+    private ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
         logger.info("Started createBook in BookController.");
-
-        bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
+        try {
+            logger.info("Success createBook in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto))));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed createBook in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @PutMapping(value = "/book")
-    private BookDto updateBook(@RequestBody BookDto bookDto) {
+    private ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) {
         logger.info("Started updateBook in BookController.");
-
-        return bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto)));
+        try {
+            logger.info("Success updateBook in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto))));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed updateBook in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @GetMapping(value = "/book{id}")
-    private BookDto getBook(@RequestParam Long id) {
+    private ResponseEntity<?> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
-
-        return bookMapper.mapToBookDto(bookService.findBookById(id));
+        try {
+            logger.info("Success getBook in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.findBookById(id)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed getBook in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @GetMapping(value = "/books")
-    private List<BookDto> getAllBooks() {
+    private ResponseEntity<List<BookDto>> getAllBooks() {
         logger.info("Started getAllBooks in BookController.");
-
-        return bookMapper.mapToBookDtoList(bookService.getAllBooks());
+        try {
+            logger.info("Success getAllBooks in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.getAllBooks()));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed getAllBooks in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @DeleteMapping(value = "/book{id}")
-    private void deleteBook(@RequestParam Long id) {
+    private ResponseEntity<?> deleteBook(@RequestParam Long id) {
         logger.info("Started deleteBook in BookController.");
-
-        bookService.deleteBook(id);
+        try {
+            bookService.deleteBook(id);
+            logger.info("Success deleteBook in BookController.");
+            return ResponseEntity.noContent().build();
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed deleteBook in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @PatchMapping(value = "/book{id}")
-    private BookDto withdrawnBook(@RequestParam Long id) {
+    private ResponseEntity<BookDto> withdrawnBook(@RequestParam Long id) {
         logger.info("Started withdrawnBook in BookController.");
-
-        BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-
-        return bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto)));
+        try {
+            BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
+            logger.info("Success withdrawnBook in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto))));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed withdrawnBook in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @GetMapping(value = "/booksc")
-    private Long countBooks() {
-        logger.info("Started withdrawnBook in BookController.");
-
-        return bookService.countBooks();
+    private ResponseEntity<?> countBooks() {
+        logger.info("Started countBooks in BookController.");
+        try {
+            logger.info("Success countBooks in BookController.");
+            return ResponseEntity.ok(bookService.countBooks());
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed countBooks in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 
     @PatchMapping(value = "/changebookstatus{id&status}")
-    private BookDto changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
+    private ResponseEntity<BookDto> changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
         logger.info("Started changeBookStatus in BookController.");
-        BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-
-        return bookMapper.mapToBookDto(bookService.changeBookStatus(bookMapper.mapToBook(bookDto), status));
+        try {
+            BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
+            logger.info("Success countBooks in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.changeBookStatus(bookMapper.mapToBook(bookDto), status)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed countBooks in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+        }
     }
 }
