@@ -48,17 +48,10 @@ public class BookcaseService {
         bookcaseRepository.delete(deleteBookcase);
     }
 
-/*    public void addBooksToBookcase(final Set<Book> bookSet, final Long id){
-        Bookcase updateBookcase = bookcaseRepository.findById(id).orElseThrow();
-        for (Book book : bookSet) {
-            updateBookcase.getBooks().add(bookRepository.findById(book.getId()).get());
-        }
-        bookcaseRepository.save(updateBookcase);
-    }*/
-
     public Bookcase addBookToBookcase(final Long id, final Long bookId){
         Bookcase updateBookcase = bookcaseRepository.findById(id).orElseThrow();
-        Book addBook = bookRepository.findById(bookId).get();
+        Book addBook = bookRepository.findById(bookId).orElse(null);
+        assert addBook != null;
         addBook.setBookcase(updateBookcase);
         bookRepository.save(addBook);
 

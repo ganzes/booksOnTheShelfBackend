@@ -26,9 +26,10 @@ public class ReaderController {
     private ReaderService readerService;
 
     private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
+    private static final String INVALID = "Invalid ";
 
     @PostMapping(value = "/reader")
-    private ResponseEntity<ReaderDto> createReader(@RequestBody ReaderDto readerDto) {
+    public ResponseEntity<ReaderDto> createReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started createReader in ReaderController.");
         try {
             logger.info("Success createReader in ReaderController.");
@@ -36,12 +37,12 @@ public class ReaderController {
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed createReader in ReaderController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @PutMapping(value = "/reader")
-    private ResponseEntity<ReaderDto> updateReader(@RequestBody ReaderDto readerDto) {
+    public ResponseEntity<ReaderDto> updateReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started updateReader in ReaderController.");
         try {
             logger.info("Success updateReader in ReaderController.");
@@ -49,36 +50,36 @@ public class ReaderController {
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed updateReader ContactController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @GetMapping(value = "/readers")
-    private ResponseEntity<List<ReaderDto>> getAllReaders() {
+    public ResponseEntity<List<ReaderDto>> getAllReaders() {
         logger.info("Started getAllReaders in ReaderController.");
         try {
             logger.info("Success getAllReaders in ReaderController.");
             return ResponseEntity.ok(readerMapper.mapToReaderDtoList(readerService.getAllReaders()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllReaders ContactController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid" + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @GetMapping(value = "/reader{id}")
-    private ResponseEntity<ReaderDto> getReader(@RequestParam Long id) {
+    public ResponseEntity<ReaderDto> getReader(@RequestParam Long id) {
         logger.info("Started getReader in BookController.");
         try {
             logger.info("Started getReader in BookController.");
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.findReaderById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getReader ContactController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid" + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @DeleteMapping(value = "/reader{id}")
-    private ResponseEntity<?> deleteReader(@RequestParam Long id) {
+    public ResponseEntity<?> deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
         try {
             logger.info("Started deleteReader in ReaderController.");
@@ -86,19 +87,19 @@ public class ReaderController {
             return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed deleteReader ContactController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @PatchMapping(value = "/reader{id&numberOfPages}")
-    private ResponseEntity<?> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
+    public ResponseEntity<?> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderController.");
         try {
             logger.info("Success addPagesToReader in ReaderController.");
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addPagesToReader(id, numberOfPages)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed addPagesToReader ContactController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid" + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 }

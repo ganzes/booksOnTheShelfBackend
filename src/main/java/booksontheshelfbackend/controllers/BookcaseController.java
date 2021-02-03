@@ -27,9 +27,10 @@ public class BookcaseController {
     private BookcaseService bookcaseService;
 
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
+    private static final String INVALID = "Invalid ";
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    private void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
+    public void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started createBookcase in BookcaseController.");
         try {
             if (!bookcaseService.existById(bookcaseDto.getId())) {
@@ -42,12 +43,12 @@ public class BookcaseController {
             }
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed createBookcase in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @PutMapping(value = "/bookcase")
-    private BookcaseDto updateBookcase(@RequestBody BookcaseDto bookcaseDto) {
+    public BookcaseDto updateBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started updateBookcase in BookcaseController.");
         if (bookcaseDto.getId() == 0) {
             logger.info("0 updateBookcase in BookcaseController.");
@@ -79,55 +80,55 @@ public class BookcaseController {
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllBookcases in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @GetMapping(value = "/bookcase{id}")
-    private ResponseEntity<BookcaseDto> getBookcase(@RequestParam Long id) {
+    public ResponseEntity<BookcaseDto> getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
         try {
             logger.info("Succeed getBookcase in BookcaseController.");
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getBookcase in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @DeleteMapping(value = "/bookcase{id}")
-    private void deleteBookcase(@RequestParam Long id) {
+    public void deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
         try {
             logger.info("Succeed deleteBookcase in BookcaseController.");
             bookcaseService.deleteBookcase(id);
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed deleteBookcase in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @PutMapping(value = "/bookcasebook{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<?> addBookToBookcase(@RequestParam Long id, @RequestParam Long bookId) {
+    public ResponseEntity<?> addBookToBookcase(@RequestParam Long id, @RequestParam Long bookId) {
         logger.info("Started addBookToBookcase in BookcaseController.");
         try {
             logger.info("Succeed addBookToBookcase in BookcaseController.");
             return ResponseEntity.ok(bookcaseService.addBookToBookcase(id, bookId));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed addBookToBookcase in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 
     @GetMapping(value = "/booksinbookcase")
-    private ResponseEntity<?> countBooksInBookcase(@RequestParam Long id) {
+    public ResponseEntity<?> countBooksInBookcase(@RequestParam Long id) {
         logger.info("Started countBooksInBookcase in BookcaseController.");
         try {
             logger.info("Succeed countBooksInBookcase in BookcaseController.");
             return ResponseEntity.ok(bookcaseService.countBooksInBookcase(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed countBooksInBookcase in BookcaseController!");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid " + e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
 }
