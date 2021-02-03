@@ -78,7 +78,7 @@ public class BookController {
     }
 
     @DeleteMapping(value = "/book{id}")
-    public ResponseEntity<?> deleteBook(@RequestParam Long id) {
+    public ResponseEntity<Void> deleteBook(@RequestParam Long id) {
         logger.info("Started deleteBook in BookController.");
         try {
             bookService.deleteBook(id);
@@ -104,7 +104,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/booksc")
-    public ResponseEntity<?> countBooks() {
+    public ResponseEntity<Long> countBooks() {
         logger.info("Started countBooks in BookController.");
         try {
             logger.info("Success countBooks in BookController.");

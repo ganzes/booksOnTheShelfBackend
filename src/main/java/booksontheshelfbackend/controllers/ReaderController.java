@@ -79,7 +79,7 @@ public class ReaderController {
     }
 
     @DeleteMapping(value = "/reader{id}")
-    public ResponseEntity<?> deleteReader(@RequestParam Long id) {
+    public ResponseEntity<Void> deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
         try {
             logger.info("Started deleteReader in ReaderController.");
@@ -92,7 +92,7 @@ public class ReaderController {
     }
 
     @PatchMapping(value = "/reader{id&numberOfPages}")
-    public ResponseEntity<?> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
+    public ResponseEntity<ReaderDto> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderController.");
         try {
             logger.info("Success addPagesToReader in ReaderController.");
