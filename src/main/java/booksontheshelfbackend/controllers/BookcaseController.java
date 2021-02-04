@@ -109,7 +109,7 @@ public class BookcaseController {
         }
     }
 
-    @PutMapping(value = "/bookcasebook{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/bookcasebook/{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookcaseDto> addBookToBookcase(@RequestParam Long id, @RequestParam Long bookId) {
         logger.info("Started addBookToBookcase in BookcaseController.");
         try {

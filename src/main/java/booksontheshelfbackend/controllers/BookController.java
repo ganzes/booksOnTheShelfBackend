@@ -53,7 +53,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(value = "/book{id}")
+    @GetMapping(value = "/book/{id}")
     public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
         try {
@@ -77,7 +77,7 @@ public class BookController {
         }
     }
 
-    @DeleteMapping(value = "/book{id}")
+    @DeleteMapping(value = "/book/{id}")
     public ResponseEntity<Void> deleteBook(@RequestParam Long id) {
         logger.info("Started deleteBook in BookController.");
         try {
@@ -90,7 +90,7 @@ public class BookController {
         }
     }
 
-    @PatchMapping(value = "/book{id}")
+    @PatchMapping(value = "/book/{id}")
     public ResponseEntity<BookDto> withdrawnBook(@RequestParam Long id) {
         logger.info("Started withdrawnBook in BookController.");
         try {
@@ -115,7 +115,7 @@ public class BookController {
         }
     }
 
-    @PatchMapping(value = "/changebookstatus{id&status}")
+    @PatchMapping(value = "/changebookstatus/{id&status}")
     public ResponseEntity<BookDto> changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
         logger.info("Started changeBookStatus in BookController.");
         try {
