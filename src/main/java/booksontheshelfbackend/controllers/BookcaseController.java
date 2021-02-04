@@ -84,7 +84,7 @@ public class BookcaseController {
         }
     }
 
-    @GetMapping(value = "/bookcase{id}")
+    @GetMapping(value = "/bookcase/{id}")
     public ResponseEntity<BookcaseDto> getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
         try {
@@ -96,7 +96,7 @@ public class BookcaseController {
         }
     }
 
-    @DeleteMapping(value = "/bookcase{id}")
+    @DeleteMapping(value = "/bookcase/{id}")
     public ResponseEntity<Void> deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
         try {
