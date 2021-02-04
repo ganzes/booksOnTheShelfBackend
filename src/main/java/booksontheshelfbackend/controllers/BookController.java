@@ -54,7 +54,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/book{id}")
-    public ResponseEntity<?> getBook(@RequestParam Long id) {
+    public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
         try {
             logger.info("Success getBook in BookController.");
