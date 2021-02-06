@@ -33,14 +33,19 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bookcase_id")
-    @JsonBackReference
+    @JsonBackReference(value = "book_bookcase")
     private Bookcase bookcase;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "reader_id")
+    @JsonBackReference(value = "reader_books")
+    private Reader reader;
 
     public Book() {
     }
 
     public Book(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
-                boolean withdrawn, Bookcase bookcase) {
+                boolean withdrawn, Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -49,6 +54,7 @@ public class Book {
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
         this.bookcase = bookcase;
+        this.reader = reader;
     }
 
     public long getId() {
@@ -83,6 +89,10 @@ public class Book {
         return bookcase;
     }
 
+    public Reader getReader() {
+        return reader;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -113,5 +123,9 @@ public class Book {
 
     public void setBookcase(Bookcase bookcase) {
         this.bookcase = bookcase;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 }

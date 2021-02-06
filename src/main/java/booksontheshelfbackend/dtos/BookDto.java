@@ -1,6 +1,7 @@
 package booksontheshelfbackend.dtos;
 
 import booksontheshelfbackend.entities.Bookcase;
+import booksontheshelfbackend.entities.Reader;
 import booksontheshelfbackend.enums.BookStatusEnum;
 
 public class BookDto {
@@ -13,12 +14,13 @@ public class BookDto {
     private BookStatusEnum bookStatusEnum;
     private boolean withdrawn;
     private Bookcase bookcase;
+    private Reader reader;
 
     public BookDto() {
     }
 
     public BookDto(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
-                   boolean withdrawn, Bookcase bookcase) {
+                   boolean withdrawn, Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -27,6 +29,7 @@ public class BookDto {
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
         this.bookcase = bookcase;
+        this.reader = reader;
     }
 
     public long getId() {
@@ -61,6 +64,10 @@ public class BookDto {
         return bookcase;
     }
 
+    public Reader getReader() {
+        return reader;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -91,5 +98,9 @@ public class BookDto {
 
     public void setBookcase(Bookcase bookcase) {
         this.bookcase = bookcase;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 }
