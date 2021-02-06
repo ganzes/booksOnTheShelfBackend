@@ -14,7 +14,7 @@ Original web-based application allowing readers to change their books status, re
 - Programming language: Java 11
 - Build automation tool: Maven
 - Test coverage - target 75%
-- Framework: Spring
+- Framework: Spring Boot
 
 **Front-End:** [repository](https://github.com/zh-betina/booksOnTheShelfFrontend)
 * UI Library: React
