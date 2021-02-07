@@ -20,8 +20,8 @@ public class Reader {
     @Column(name = "pages")
     private long pages;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "datecreaderreated")
+    private LocalDate dateReaderCreated;
 
     @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
     @JsonManagedReference(value = "reader_books")
@@ -34,11 +34,11 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(long id, String name, long pages, LocalDate date, Set<Book> books, Set<Bookcase> bookcases) {
+    public Reader(long id, String name, long pages, LocalDate dateReaderCreated, Set<Book> books, Set<Bookcase> bookcases) {
         this.id = id;
         this.name = name;
         this.pages = pages;
-        this.date = LocalDate.now();
+        this.dateReaderCreated = LocalDate.now();
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -55,7 +55,7 @@ public class Reader {
         return pages;
     }
 
-    public LocalDate getDate() {
+    public LocalDate getDateReaderCreated() {
         return LocalDate.now();
     }
 
@@ -79,8 +79,8 @@ public class Reader {
         this.pages = pages;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateReaderCreated(LocalDate dateReaderCreated) {
+        this.dateReaderCreated = dateReaderCreated;
     }
 
     public void setBookcases(Set<Bookcase> bookcases) {

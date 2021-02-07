@@ -57,7 +57,7 @@ public class ReaderService {
         readerRepository.delete(deleteReader);
     }
 
-    public Reader addPagesToReader (Long id, Long numberOfPages){
+    public Reader addPagesToReader(Long id, Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderRepository");
 
         Reader updateReader = readerRepository.findById(id).orElseThrow();
@@ -66,5 +66,4 @@ public class ReaderService {
         return readerRepository.save(updateReader);
 
     }
-
 }

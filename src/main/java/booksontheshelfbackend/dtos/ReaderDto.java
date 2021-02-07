@@ -13,18 +13,18 @@ public class ReaderDto {
     private String name;
     private long pages;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDate dateReaderCreated;
     private Set<Book> books;
     private Set<Bookcase> bookcases;
 
     public ReaderDto() {
     }
 
-    public ReaderDto(long id, String name, long pages, LocalDate date, Set<Book> books, Set<Bookcase> bookcases) {
+    public ReaderDto(long id, String name, long pages, LocalDate dateReaderCreated, Set<Book> books, Set<Bookcase> bookcases) {
         this.id = id;
         this.name = name;
         this.pages = pages;
-        this.date = LocalDate.now();
+        this.dateReaderCreated = LocalDate.now();
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -41,7 +41,7 @@ public class ReaderDto {
         return pages;
     }
 
-    public LocalDate getDate() {
+    public LocalDate getDateReaderCreated() {
         return LocalDate.now();
     }
 
@@ -65,8 +65,8 @@ public class ReaderDto {
         this.pages = pages;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateReaderCreated(LocalDate dateReaderCreated) {
+        this.dateReaderCreated = dateReaderCreated;
     }
 
     public void setBooks(Set<Book> books) {
