@@ -1,6 +1,5 @@
 package booksontheshelfbackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -39,7 +38,7 @@ public class Reader {
         this.id = id;
         this.name = name;
         this.pages = pages;
-        this.date = date;
+        this.date = LocalDate.now();
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -57,7 +56,7 @@ public class Reader {
     }
 
     public LocalDate getDate() {
-        return date;
+        return LocalDate.now();
     }
 
     public Set<Book> getBooks() {

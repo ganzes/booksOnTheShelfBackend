@@ -24,7 +24,7 @@ public class ReaderDto {
         this.id = id;
         this.name = name;
         this.pages = pages;
-        this.date = date;
+        this.date = LocalDate.now();
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -42,7 +42,7 @@ public class ReaderDto {
     }
 
     public LocalDate getDate() {
-        return date;
+        return LocalDate.now();
     }
 
     public Set<Book> getBooks() {
