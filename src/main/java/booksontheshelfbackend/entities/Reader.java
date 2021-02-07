@@ -1,11 +1,13 @@
 package booksontheshelfbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
-
+@EntityListeners(AuditingEntityListener.class)
 @Entity(name = "reader")
 public class Reader {
 
@@ -20,7 +22,8 @@ public class Reader {
     @Column(name = "pages")
     private long pages;
 
-    @Column(name = "datecreaderreated")
+    @CreatedDate
+    @Column(name = "datecreaderreated", columnDefinition = "timestamp", nullable = false)
     private LocalDate dateReaderCreated;
 
     @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
@@ -34,11 +37,12 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(long id, String name, long pages, LocalDate dateReaderCreated, Set<Book> books, Set<Bookcase> bookcases) {
+    public Reader(long id, String name, long pages, LocalDate dateReaderCreated,
+                  Set<Book> books, Set<Bookcase> bookcases) {
         this.id = id;
         this.name = name;
         this.pages = pages;
-        this.dateReaderCreated = LocalDate.now();
+        this.dateReaderCreated = dateReaderCreated;
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -56,7 +60,7 @@ public class Reader {
     }
 
     public LocalDate getDateReaderCreated() {
-        return LocalDate.now();
+        return dateReaderCreated;
     }
 
     public Set<Book> getBooks() {
@@ -83,11 +87,11 @@ public class Reader {
         this.dateReaderCreated = dateReaderCreated;
     }
 
-    public void setBookcases(Set<Bookcase> bookcases) {
-        this.bookcases = bookcases;
-    }
-
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public void setBookcases(Set<Bookcase> bookcases) {
+        this.bookcases = bookcases;
     }
 }
