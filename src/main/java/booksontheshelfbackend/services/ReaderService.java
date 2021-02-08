@@ -71,7 +71,10 @@ public class ReaderService {
         pagesRepository.save(optionalPage);
 
         return readerRepository.save(optionalReader);
-
     }
 
+    public Long countAllPagesInReader(final Long id) {
+        Reader optionalReader = readerRepository.findById(id).orElseThrow();
+        return optionalReader.getPages().stream().mapToLong(Pages::getPagesRead).sum();
+    }
 }

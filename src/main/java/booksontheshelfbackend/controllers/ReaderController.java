@@ -103,4 +103,15 @@ public class ReaderController {
         }
     }
 
+    @GetMapping(value = "/readercountpagesread{id}")
+    public ResponseEntity<Long> countPagesReadInReader(@RequestParam Long id) {
+        logger.info("Started countPagesReadInReader in ReaderController.");
+        try {
+            logger.info("Success countPagesReadInReader in ReaderController.");
+            return ResponseEntity.ok(readerService.countAllPagesInReader(id));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed addPagesToReader ContactController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
 }
