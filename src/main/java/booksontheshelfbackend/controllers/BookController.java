@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @CrossOrigin("*")
 @RestController
@@ -53,7 +54,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(value = "/book/{id}")
+    @GetMapping(value = "/book{id}")
     public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
         try {
@@ -77,14 +78,14 @@ public class BookController {
         }
     }
 
-    @DeleteMapping(value = "/book/{id}")
+    @DeleteMapping(value = "/book{id}")
     public ResponseEntity<Void> deleteBook(@RequestParam Long id) {
         logger.info("Started deleteBook in BookController.");
         try {
             bookService.deleteBook(id);
             logger.info("Success deleteBook in BookController.");
             return ResponseEntity.noContent().build();
-        } catch (ResponseStatusException | HttpServerErrorException e) {
+        } catch (ResponseStatusException | NoSuchElementException | HttpServerErrorException e) {
             logger.warn("Failed deleteBook in BookController!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }

@@ -1,5 +1,6 @@
 package booksontheshelfbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,12 +21,14 @@ public class Reader {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "pages")
-    private long pages;
-
     @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "datecreaderreated", columnDefinition = "timestamp", nullable = false)
     private LocalDate dateReaderCreated;
+
+    @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "reader_pages")
+    private Set<Pages> pages;
 
     @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
     @JsonManagedReference(value = "reader_books")
@@ -38,11 +41,11 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(long id, String name, long pages, LocalDate dateReaderCreated, Set<Book> books, Set<Bookcase> bookcases) {
+    public Reader(long id, String name, LocalDate dateReaderCreated, Set<Pages> pages, Set<Book> books, Set<Bookcase> bookcases) {
         this.id = id;
         this.name = name;
-        this.pages = pages;
         this.dateReaderCreated = dateReaderCreated;
+        this.pages = pages;
         this.books = books;
         this.bookcases = bookcases;
     }
@@ -55,12 +58,12 @@ public class Reader {
         return name;
     }
 
-    public long getPages() {
-        return pages;
-    }
-
     public LocalDate getDateReaderCreated() {
         return dateReaderCreated;
+    }
+
+    public Set<Pages> getPages() {
+        return pages;
     }
 
     public Set<Book> getBooks() {
@@ -79,19 +82,19 @@ public class Reader {
         this.name = name;
     }
 
-    public void setPages(long pages) {
-        this.pages = pages;
-    }
-
     public void setDateReaderCreated(LocalDate dateReaderCreated) {
         this.dateReaderCreated = dateReaderCreated;
     }
 
-    public void setBookcases(Set<Bookcase> bookcases) {
-        this.bookcases = bookcases;
+    public void setPages(Set<Pages> pages) {
+        this.pages = pages;
     }
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public void setBookcases(Set<Bookcase> bookcases) {
+        this.bookcases = bookcases;
     }
 }

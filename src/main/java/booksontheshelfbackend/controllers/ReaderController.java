@@ -91,7 +91,7 @@ public class ReaderController {
         }
     }
 
-    @PatchMapping(value = "/reader/{id&numberOfPages}")
+    @PatchMapping(value = "/reader{id&numberOfPages}")
     public ResponseEntity<ReaderDto> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderController.");
         try {
@@ -102,4 +102,5 @@ public class ReaderController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
+
 }
