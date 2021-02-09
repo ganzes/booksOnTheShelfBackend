@@ -31,7 +31,7 @@ public class PagesDto {
     }
 
     public LocalDate getDatePagesAdded() {
-        return datePagesAdded;
+        return LocalDate.now();
     }
 
     public Reader getReader() {
