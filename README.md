@@ -6,6 +6,7 @@ Original web-based application allowing readers to change their books status, re
 - adding new bookcases
 - catalog books
 - tracking readers reading habits
+- adding read pages
 
 # Technology stack and tools:
 **Back-End:**
