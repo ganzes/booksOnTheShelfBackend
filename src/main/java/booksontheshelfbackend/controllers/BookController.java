@@ -134,7 +134,14 @@ public class BookController {
 
     @GetMapping(value = "/books{bookStatusEnum)}")
     public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus){
-        return ResponseEntity.ok(bookService.findBookByStatus(bookStatus));
+        logger.info("Started findBookByStatus in BookController.");
+        try {
+            logger.info("Success findBookByStatus in BookController.");
+            return ResponseEntity.ok(bookService.findBookByStatus(bookStatus));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByStatus in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
     }
 
     @GetMapping(value = "/bookswithdrawnedtrue")
