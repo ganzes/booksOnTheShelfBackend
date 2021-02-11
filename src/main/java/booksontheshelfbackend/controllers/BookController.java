@@ -130,7 +130,6 @@ public class BookController {
         }
     }
 
-
     @GetMapping(value = "/books{bookStatusEnum)}")
     public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
@@ -145,16 +144,37 @@ public class BookController {
 
     @GetMapping(value = "/bookswithdrawnedtrue")
     public ResponseEntity<List<Book>> findBookByWithdrawnIsTrue() {
-        return ResponseEntity.ok(bookService.findBookByWithdrawnIsTrue());
+        logger.info("Started findBookByWithdrawnIsTrue in BookController.");
+        try {
+            logger.info("Success findBookByWithdrawnIsTrue in BookController.");
+            return ResponseEntity.ok(bookService.findBookByWithdrawnIsTrue());
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByWithdrawnIsTrue in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
     }
 
     @GetMapping(value = "/bookswithdrawnedfalse")
     public ResponseEntity<List<Book>> findBookByWithdrawnIsFalse() {
-        return ResponseEntity.ok(bookService.findBookByWithdrawnIsFalse());
+        logger.info("Started findBookByWithdrawnIsFalse in BookController.");
+        try {
+            logger.info("Success findBookByWithdrawnIsFalse in BookController.");
+            return ResponseEntity.ok(bookService.findBookByWithdrawnIsFalse());
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByWithdrawnIsFalse in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
     }
 
     @GetMapping(value = "/bookswithdrawned{oneZero}")
     public ResponseEntity<List<Book>> findBookByWithdrawn(boolean oneZero) {
-        return ResponseEntity.ok(bookService.findBookByWithdrawn(oneZero));
+        logger.info("Started findBookByWithdrawn in BookController.");
+        try {
+            logger.info("Success findBookByWithdrawn in BookController.");
+            return ResponseEntity.ok(bookService.findBookByWithdrawn(oneZero));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByWithdrawn in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
     }
 }
