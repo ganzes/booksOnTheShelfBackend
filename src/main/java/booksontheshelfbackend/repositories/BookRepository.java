@@ -18,6 +18,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBookByBookStatusEnum(String bookStatus);
 
+    List <Book> findBookByWithdrawnIsTrue();
+
+    List <Book> findBookByWithdrawnIsFalse();
+
     @Override
     Optional<Book> findById(Long id);
 

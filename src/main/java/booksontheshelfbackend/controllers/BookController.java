@@ -136,4 +136,14 @@ public class BookController {
     public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus){
         return ResponseEntity.ok(bookService.findBookByStatus(bookStatus));
     }
+
+    @GetMapping(value = "/bookswithdrawnedtrue")
+    public ResponseEntity<List<Book>> findBookByWithdrawnIsTrue(){
+        return ResponseEntity.ok(bookService.findBookByWithdrawnIsTrue());
+    }
+
+    @GetMapping(value = "/bookswithdrawnedfalse")
+    public ResponseEntity<List<Book>> findBookByWithdrawnIsFalse(){
+        return ResponseEntity.ok(bookService.findBookByWithdrawnIsFalse());
+    }
 }

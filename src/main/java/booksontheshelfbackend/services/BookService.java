@@ -75,8 +75,15 @@ public class BookService {
         return bookRepository.save(updateBook);
     }
 
-    public List<Book> findBookByStatus(String bookStatus){
-
+    public List<Book> findBookByStatus(String bookStatus) {
         return bookRepository.findBookByBookStatusEnum(bookStatus);
+    }
+
+    public List<Book> findBookByWithdrawnIsTrue(){
+        return bookRepository.findBookByWithdrawnIsTrue();
+    }
+
+    public List<Book> findBookByWithdrawnIsFalse(){
+        return bookRepository.findBookByWithdrawnIsFalse();
     }
 }
