@@ -86,4 +86,8 @@ public class BookService {
     public List<Book> findBookByWithdrawnIsFalse(){
         return bookRepository.findBookByWithdrawnIsFalse();
     }
+
+    public List<Book> findBookByWithdrawn(boolean oneZero){
+        return bookRepository.findBookByWithdrawn(oneZero);
+    }
 }

@@ -22,6 +22,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List <Book> findBookByWithdrawnIsFalse();
 
+    List <Book> findBookByWithdrawn(boolean oneZero);
+
     @Override
     Optional<Book> findById(Long id);
 

@@ -146,4 +146,9 @@ public class BookController {
     public ResponseEntity<List<Book>> findBookByWithdrawnIsFalse(){
         return ResponseEntity.ok(bookService.findBookByWithdrawnIsFalse());
     }
+
+    @GetMapping(value = "/bookswithdrawned{oneZero}")
+    public ResponseEntity<List<Book>> findBookByWithdrawn(boolean oneZero){
+        return ResponseEntity.ok(bookService.findBookByWithdrawn(oneZero));
+    }
 }
