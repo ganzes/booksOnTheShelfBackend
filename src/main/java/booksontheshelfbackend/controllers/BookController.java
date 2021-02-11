@@ -1,6 +1,8 @@
 package booksontheshelfbackend.controllers;
 
 import booksontheshelfbackend.dtos.BookDto;
+import booksontheshelfbackend.entities.Book;
+import booksontheshelfbackend.enums.BookStatusEnum;
 import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.services.BookService;
 import org.slf4j.Logger;
@@ -127,5 +129,11 @@ public class BookController {
             logger.warn("Failed countBooks in BookController!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
+    }
+
+
+    @GetMapping(value = "/books{bookStatusEnum)}")
+    public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus){
+        return ResponseEntity.ok(bookService.findBookByStatus(bookStatus));
     }
 }

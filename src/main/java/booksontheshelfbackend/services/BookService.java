@@ -74,4 +74,9 @@ public class BookService {
 
         return bookRepository.save(updateBook);
     }
+
+    public List<Book> findBookByStatus(String bookStatus){
+
+        return bookRepository.findBookByBookStatusEnum(bookStatus);
+    }
 }
