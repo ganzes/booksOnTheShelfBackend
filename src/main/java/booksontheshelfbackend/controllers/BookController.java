@@ -2,7 +2,6 @@ package booksontheshelfbackend.controllers;
 
 import booksontheshelfbackend.dtos.BookDto;
 import booksontheshelfbackend.entities.Book;
-import booksontheshelfbackend.enums.BookStatusEnum;
 import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.services.BookService;
 import org.slf4j.Logger;
@@ -133,7 +132,7 @@ public class BookController {
 
 
     @GetMapping(value = "/books{bookStatusEnum)}")
-    public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus){
+    public ResponseEntity<List<Book>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
         try {
             logger.info("Success findBookByStatus in BookController.");
@@ -145,17 +144,17 @@ public class BookController {
     }
 
     @GetMapping(value = "/bookswithdrawnedtrue")
-    public ResponseEntity<List<Book>> findBookByWithdrawnIsTrue(){
+    public ResponseEntity<List<Book>> findBookByWithdrawnIsTrue() {
         return ResponseEntity.ok(bookService.findBookByWithdrawnIsTrue());
     }
 
     @GetMapping(value = "/bookswithdrawnedfalse")
-    public ResponseEntity<List<Book>> findBookByWithdrawnIsFalse(){
+    public ResponseEntity<List<Book>> findBookByWithdrawnIsFalse() {
         return ResponseEntity.ok(bookService.findBookByWithdrawnIsFalse());
     }
 
     @GetMapping(value = "/bookswithdrawned{oneZero}")
-    public ResponseEntity<List<Book>> findBookByWithdrawn(boolean oneZero){
+    public ResponseEntity<List<Book>> findBookByWithdrawn(boolean oneZero) {
         return ResponseEntity.ok(bookService.findBookByWithdrawn(oneZero));
     }
 }
