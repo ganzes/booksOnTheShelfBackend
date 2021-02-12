@@ -90,4 +90,12 @@ public class BookService {
     public List<Book> findBookByWithdrawn(boolean oneZero){
         return bookRepository.findBookByWithdrawn(oneZero);
     }
+
+    public List<Book> findBookByAuthor(String author){
+        return bookRepository.findBookByAuthor(author);
+    }
+
+    public List<Book> findBookByTitle(String title){
+        return bookRepository.findBookByTitle(title);
+    }
 }

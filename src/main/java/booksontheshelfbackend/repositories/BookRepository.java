@@ -23,6 +23,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List <Book> findBookByWithdrawn(boolean oneZero);
 
+    List<Book> findBookByAuthor(String author);
+
+    List<Book> findBookByTitle(String title);
+
     @Override
     Optional<Book> findById(Long id);
 

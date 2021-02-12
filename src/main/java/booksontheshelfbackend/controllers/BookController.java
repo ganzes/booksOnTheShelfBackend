@@ -177,4 +177,28 @@ public class BookController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
+
+    @GetMapping(value = "/findBookByAuthor{author}")
+    public ResponseEntity<List<Book>> findBookByAuthor(String author) {
+        logger.info("Started findBookByAuthor in BookController.");
+        try {
+            logger.info("Success findBookByAuthor in BookController.");
+            return ResponseEntity.ok(bookService.findBookByAuthor(author));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByAuthor in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
+    @GetMapping(value = "/findBookByTitle{title}")
+    public ResponseEntity<List<Book>> findBookByTitle(String title) {
+        logger.info("Started findBookByTitle in BookController.");
+        try {
+            logger.info("Success findBookByTitle in BookController.");
+            return ResponseEntity.ok(bookService.findBookByTitle(title));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByWithdrawnIsFalse in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
 }
