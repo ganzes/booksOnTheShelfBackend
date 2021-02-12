@@ -22,6 +22,9 @@ public class Book {
     @Column(name = "pages")
     private long pages;
 
+    @Column(name = "publisher")
+    private String publisher;
+
     @Column(name = "comment")
     private String comment;
 
@@ -44,12 +47,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
+    public Book(long id, String author, String title, long pages, String publisher, String comment, BookStatusEnum bookStatusEnum,
                 boolean withdrawn, Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pages = pages;
+        this.publisher =  publisher;
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
@@ -71,6 +75,10 @@ public class Book {
 
     public long getPages() {
         return pages;
+    }
+
+    public String getPublisher() {
+        return publisher;
     }
 
     public String getComment() {
@@ -107,6 +115,10 @@ public class Book {
 
     public void setPages(long pages) {
         this.pages = pages;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public void setComment(String comment) {

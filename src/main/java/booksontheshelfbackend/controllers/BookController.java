@@ -1,7 +1,6 @@
 package booksontheshelfbackend.controllers;
 
 import booksontheshelfbackend.dtos.BookDto;
-import booksontheshelfbackend.entities.Book;
 import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.services.BookService;
 import org.slf4j.Logger;
@@ -197,7 +196,19 @@ public class BookController {
             logger.info("Success findBookByTitle in BookController.");
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByTitle(title)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByWithdrawnIsFalse in BookController!");
+            logger.warn("Failed findBookByTitle in BookController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
+    @GetMapping(value = "/findbookbypublisher{publisher}")
+    public ResponseEntity<List<BookDto>> findBookByPublisher(String publisher) {
+        logger.info("Started findBookByPublisher in BookController.");
+        try {
+            logger.info("Success findBookByPublisher in BookController.");
+            return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByPublisher(publisher)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookByPublisher in BookController!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }

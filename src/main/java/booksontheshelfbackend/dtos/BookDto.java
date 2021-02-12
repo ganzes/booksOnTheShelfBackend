@@ -10,6 +10,7 @@ public class BookDto {
     private String author;
     private String title;
     private long pages;
+    private String publisher;
     private String comment;
     private BookStatusEnum bookStatusEnum;
     private boolean withdrawn;
@@ -19,12 +20,13 @@ public class BookDto {
     public BookDto() {
     }
 
-    public BookDto(long id, String author, String title, long pages, String comment, BookStatusEnum bookStatusEnum,
+    public BookDto(long id, String author, String title, long pages, String publisher, String comment, BookStatusEnum bookStatusEnum,
                    boolean withdrawn, Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pages = pages;
+        this.publisher = publisher;
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
         this.withdrawn = withdrawn;
@@ -46,6 +48,10 @@ public class BookDto {
 
     public long getPages() {
         return pages;
+    }
+
+    public String getPublisher() {
+        return publisher;
     }
 
     public String getComment() {
@@ -82,6 +88,10 @@ public class BookDto {
 
     public void setPages(long pages) {
         this.pages = pages;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public void setComment(String comment) {
