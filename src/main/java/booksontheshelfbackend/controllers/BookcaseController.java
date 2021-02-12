@@ -132,4 +132,16 @@ public class BookcaseController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
+
+    @GetMapping(value = "/findbookcasebytag{tag}")
+    public ResponseEntity<List<BookcaseDto>> findBookcaseByTag(@RequestParam String tag) {
+        logger.info("Started findBookcaseByTag in BookcaseController.");
+        try {
+            logger.info("Succeed findBookcaseByTag in BookcaseController.");
+            return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.findBookcaseByTag(tag)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("Failed findBookcaseByTag in BookcaseController!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
 }

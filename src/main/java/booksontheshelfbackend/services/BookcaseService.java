@@ -67,4 +67,8 @@ public class BookcaseService {
     public boolean existById(final Long id){
         return bookcaseRepository.existsById(id);
     }
+
+    public List<Bookcase> findBookcaseByTag(final String tag){
+        return bookcaseRepository.findBookcaseByTag(tag);
+    }
 }
