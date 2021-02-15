@@ -29,12 +29,13 @@ public class BookController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     private static final String INVALID = "Invalid ";
+    private static final String SUCCESS = " succeed in BookController ";
 
     @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
         logger.info("Started createBook in BookController.");
         try {
-            logger.info("Success createBook in BookController.");
+            logger.info("createBook "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed createBook in BookController!");
@@ -46,7 +47,7 @@ public class BookController {
     public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) {
         logger.info("Started updateBook in BookController.");
         try {
-            logger.info("Success updateBook in BookController.");
+            logger.info("updateBook "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed updateBook in BookController!");
@@ -58,7 +59,7 @@ public class BookController {
     public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
         try {
-            logger.info("Success getBook in BookController.");
+            logger.info("getBook "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.findBookById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getBook in BookController!");
@@ -70,7 +71,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getAllBooks() {
         logger.info("Started getAllBooks in BookController.");
         try {
-            logger.info("Success getAllBooks in BookController.");
+            logger.info("getAllBooks "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.getAllBooks()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllBooks in BookController!");
@@ -83,7 +84,7 @@ public class BookController {
         logger.info("Started deleteBook in BookController.");
         try {
             bookService.deleteBook(id);
-            logger.info("Success deleteBook in BookController.");
+            logger.info("deleteBook "+ SUCCESS);
             return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | NoSuchElementException | HttpServerErrorException e) {
             logger.warn("Failed deleteBook in BookController!");
@@ -96,7 +97,7 @@ public class BookController {
         logger.info("Started withdrawnBook in BookController.");
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-            logger.info("Success withdrawnBook in BookController.");
+            logger.info("withdrawnBook "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed withdrawnBook in BookController!");
@@ -108,7 +109,7 @@ public class BookController {
     public ResponseEntity<Long> countBooks() {
         logger.info("Started countBooks in BookController.");
         try {
-            logger.info("Success countBooks in BookController.");
+            logger.info("countBooks "+ SUCCESS);
             return ResponseEntity.ok(bookService.countBooks());
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed countBooks in BookController!");
@@ -121,7 +122,7 @@ public class BookController {
         logger.info("Started changeBookStatus in BookController.");
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-            logger.info("Success countBooks in BookController.");
+            logger.info("changeBookStatus "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.changeBookStatus(bookMapper.mapToBook(bookDto), status)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed countBooks in BookController!");
@@ -133,7 +134,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
         try {
-            logger.info("Success findBookByStatus in BookController.");
+            logger.info("findBookByStatus "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByStatus(bookStatus)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByStatus in BookController!");
@@ -145,7 +146,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsTrue() {
         logger.info("Started findBookByWithdrawnIsTrue in BookController.");
         try {
-            logger.info("Success findBookByWithdrawnIsTrue in BookController.");
+            logger.info("findBookByWithdrawnIsTrue "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsTrue()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByWithdrawnIsTrue in BookController!");
@@ -157,7 +158,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsFalse() {
         logger.info("Started findBookByWithdrawnIsFalse in BookController.");
         try {
-            logger.info("Success findBookByWithdrawnIsFalse in BookController.");
+            logger.info("findBookByWithdrawnIsFalse "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsFalse()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByWithdrawnIsFalse in BookController!");
@@ -169,7 +170,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawn(boolean oneZero) {
         logger.info("Started findBookByWithdrawn in BookController.");
         try {
-            logger.info("Success findBookByWithdrawn in BookController.");
+            logger.info("findBookByWithdrawn "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawn(oneZero)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByWithdrawn in BookController!");
@@ -181,7 +182,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByAuthor(String author) {
         logger.info("Started findBookByAuthor in BookController.");
         try {
-            logger.info("Success findBookByAuthor in BookController.");
+            logger.info("findBookByAuthor "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByAuthor(author)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByAuthor in BookController!");
@@ -193,7 +194,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByTitle(String title) {
         logger.info("Started findBookByTitle in BookController.");
         try {
-            logger.info("Success findBookByTitle in BookController.");
+            logger.info("findBookByTitle "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByTitle(title)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByTitle in BookController!");
@@ -205,7 +206,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByPublisher(String publisher) {
         logger.info("Started findBookByPublisher in BookController.");
         try {
-            logger.info("Success findBookByPublisher in BookController.");
+            logger.info("findBookByPublisher "+ SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByPublisher(publisher)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookByPublisher in BookController!");
