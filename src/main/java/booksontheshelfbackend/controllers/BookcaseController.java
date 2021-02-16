@@ -28,6 +28,8 @@ public class BookcaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
     private static final String INVALID = "Invalid ";
+    private static final String SUCCESS = " succeed in BookcaseController ";
+
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
@@ -35,7 +37,7 @@ public class BookcaseController {
         try {
             if (!bookcaseService.existById(bookcaseDto.getId())) {
                 logger.info("Bookcase does not exist in createBookcase in BookcaseController.");
-                logger.info("Succeed createBookcase in BookcaseController.");
+                logger.info("createBookcase " + SUCCESS);
                 ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto
                         (bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto))));
             } else {
@@ -56,7 +58,7 @@ public class BookcaseController {
         } else if (bookcaseService.existById(bookcaseDto.getId())) {
             logger.info("EXIST");
             try {
-                logger.info("Succeed updateBookcase in BookcaseController.");
+                logger.info("updateBookcase " + SUCCESS);
                 return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
             } catch (HttpServerErrorException e) {
                 logger.error("Exception " + e);
@@ -76,7 +78,7 @@ public class BookcaseController {
     private ResponseEntity<List<BookcaseDto>> getAllBookcases() {
         logger.info("Started getAllBookcases in BookcaseController.");
         try {
-            logger.info("Succeed getAllBookcases in BookcaseController!");
+            logger.info("getAllBookcases " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllBookcases in BookcaseController!");
@@ -88,7 +90,7 @@ public class BookcaseController {
     public ResponseEntity<BookcaseDto> getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
         try {
-            logger.info("Succeed getBookcase in BookcaseController.");
+            logger.info("getBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getBookcase in BookcaseController!");
@@ -100,7 +102,7 @@ public class BookcaseController {
     public ResponseEntity<Void> deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
         try {
-            logger.info("Succeed deleteBookcase in BookcaseController.");
+            logger.info("deleteBookcase " + SUCCESS);
             bookcaseService.deleteBookcase(id);
            return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | HttpServerErrorException e) {
@@ -113,7 +115,7 @@ public class BookcaseController {
     public ResponseEntity<BookcaseDto> addBookToBookcase(@RequestParam Long id, @RequestParam Long bookId) {
         logger.info("Started addBookToBookcase in BookcaseController.");
         try {
-            logger.info("Succeed addBookToBookcase in BookcaseController.");
+            logger.info("addBookToBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.addBookToBookcase(id, bookId)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed addBookToBookcase in BookcaseController!");
@@ -125,7 +127,7 @@ public class BookcaseController {
     public ResponseEntity<Long> countBooksInBookcase(@RequestParam Long id) {
         logger.info("Started countBooksInBookcase in BookcaseController.");
         try {
-            logger.info("Succeed countBooksInBookcase in BookcaseController.");
+            logger.info("countBooksInBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseService.countBooksInBookcase(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed countBooksInBookcase in BookcaseController!");
@@ -137,7 +139,7 @@ public class BookcaseController {
     public ResponseEntity<List<BookcaseDto>> findBookcaseByTag(@RequestParam String tag) {
         logger.info("Started findBookcaseByTag in BookcaseController.");
         try {
-            logger.info("Succeed findBookcaseByTag in BookcaseController.");
+            logger.info("findBookcaseByTag " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.findBookcaseByTag(tag)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed findBookcaseByTag in BookcaseController!");
