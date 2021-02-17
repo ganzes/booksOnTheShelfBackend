@@ -19,15 +19,15 @@ import java.util.List;
 @RequestMapping("/botsab")
 public class ReaderController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
+    private static final String INVALID = "Invalid ";
+    private static final String SUCCESS = " succeed in ReaderController.";
+
     @Autowired
     private ReaderMapper readerMapper;
 
     @Autowired
     private ReaderService readerService;
-
-    private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
-    private static final String INVALID = "Invalid ";
-    private static final String SUCCESS = " succeed in ReaderController.";
 
     @PostMapping(value = "/reader")
     public ResponseEntity<ReaderDto> createReader(@RequestBody ReaderDto readerDto) {

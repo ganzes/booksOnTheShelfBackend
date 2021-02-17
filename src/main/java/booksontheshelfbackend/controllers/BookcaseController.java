@@ -20,16 +20,15 @@ import java.util.List;
 @RequestMapping("/botsab")
 public class BookcaseController {
 
+    private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
+    private static final String INVALID = "Invalid ";
+    private static final String SUCCESS = " succeed in BookcaseController.";
+
     @Autowired
     private BookcaseMapper bookcaseMapper;
 
     @Autowired
     private BookcaseService bookcaseService;
-
-    private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
-    private static final String INVALID = "Invalid ";
-    private static final String SUCCESS = " succeed in BookcaseController.";
-
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createBookcase(@RequestBody BookcaseDto bookcaseDto) {

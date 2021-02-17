@@ -18,9 +18,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/botsab")
 public class PagesController {
+
     private static final Logger logger = LoggerFactory.getLogger(PagesController.class);
     private static final String INVALID = "Invalid ";
-    
+    private static final String SUCCESS = " succeed in PagesController.";
+
     @Autowired
     private PagesMapper pagesMapper;
 
@@ -31,7 +33,7 @@ public class PagesController {
     public ResponseEntity<List<PagesDto>> getAllPages() {
         logger.info("Started getAllPages in PagesController.");
         try {
-            logger.info("Success getAllPages in PagesController.");
+            logger.info("getAllPages "+ SUCCESS);
             return ResponseEntity.ok(pagesMapper.mapToPagesDtoList(pagesService.getAllPages()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllPages ContactController!");
@@ -43,7 +45,7 @@ public class PagesController {
     public ResponseEntity<PagesDto> createPages(@RequestBody PagesDto pagesDto) {
         logger.info("Started createPages in PagesController.");
         try {
-            logger.info("Success createPages in PagesController.");
+            logger.info("createPages "+ SUCCESS);
             return ResponseEntity.ok(pagesMapper.mapToPagesDto(pagesService.createPages
                     (pagesMapper.mapToPages(pagesDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
