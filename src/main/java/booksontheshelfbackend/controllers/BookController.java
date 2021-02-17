@@ -29,7 +29,7 @@ public class BookController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     private static final String INVALID = "Invalid ";
-    private static final String SUCCESS = " succeed in BookController ";
+    private static final String SUCCESS = " succeed in BookController.";
 
     @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {

@@ -27,12 +27,13 @@ public class ReaderController {
 
     private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
     private static final String INVALID = "Invalid ";
+    private static final String SUCCESS = " succeed in ReaderController.";
 
     @PostMapping(value = "/reader")
     public ResponseEntity<ReaderDto> createReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started createReader in ReaderController.");
         try {
-            logger.info("Success createReader in ReaderController.");
+            logger.info("createReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.createReader
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
@@ -45,7 +46,7 @@ public class ReaderController {
     public ResponseEntity<ReaderDto> updateReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started updateReader in ReaderController.");
         try {
-            logger.info("Success updateReader in ReaderController.");
+            logger.info("updateReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.updateReader
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
@@ -58,7 +59,7 @@ public class ReaderController {
     public ResponseEntity<List<ReaderDto>> getAllReaders() {
         logger.info("Started getAllReaders in ReaderController.");
         try {
-            logger.info("Success getAllReaders in ReaderController.");
+            logger.info("getAllReaders " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDtoList(readerService.getAllReaders()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getAllReaders ContactController!");
@@ -70,7 +71,7 @@ public class ReaderController {
     public ResponseEntity<ReaderDto> getReader(@RequestParam Long id) {
         logger.info("Started getReader in BookController.");
         try {
-            logger.info("Started getReader in BookController.");
+            logger.info("getReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.findReaderById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed getReader ContactController!");
@@ -82,7 +83,7 @@ public class ReaderController {
     public ResponseEntity<Void> deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
         try {
-            logger.info("Started deleteReader in ReaderController.");
+            logger.info("deleteReader " + SUCCESS);
             readerService.deleteReader(id);
             return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | HttpServerErrorException e) {
@@ -95,7 +96,7 @@ public class ReaderController {
     public ResponseEntity<ReaderDto> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderController.");
         try {
-            logger.info("Success addPagesToReader in ReaderController.");
+            logger.info("addPagesToReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addPagesToReader(id, numberOfPages)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed addPagesToReader ContactController!");
@@ -107,7 +108,7 @@ public class ReaderController {
     public ResponseEntity<Long> countPagesReadInReader(@RequestParam Long id) {
         logger.info("Started countPagesReadInReader in ReaderController.");
         try {
-            logger.info("Success countPagesReadInReader in ReaderController.");
+            logger.info("countPagesReadInReader " + SUCCESS);
             return ResponseEntity.ok(readerService.countAllPagesInReader(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("Failed addPagesToReader ContactController!");

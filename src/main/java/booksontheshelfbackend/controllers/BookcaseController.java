@@ -28,7 +28,7 @@ public class BookcaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
     private static final String INVALID = "Invalid ";
-    private static final String SUCCESS = " succeed in BookcaseController ";
+    private static final String SUCCESS = " succeed in BookcaseController.";
 
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
