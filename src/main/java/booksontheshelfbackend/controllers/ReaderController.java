@@ -67,7 +67,7 @@ public class ReaderController {
         }
     }
 
-    @GetMapping(value = "/reader/{id}")
+    @GetMapping(value = "/reader{id}")
     public ResponseEntity<ReaderDto> getReader(@RequestParam Long id) {
         logger.info("Started getReader in BookController.");
         try {
@@ -79,7 +79,7 @@ public class ReaderController {
         }
     }
 
-    @DeleteMapping(value = "/reader/{id}")
+    @DeleteMapping(value = "/reader{id}")
     public ResponseEntity<Void> deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
         try {

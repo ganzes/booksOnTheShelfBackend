@@ -92,7 +92,7 @@ public class BookController {
         }
     }
 
-    @PatchMapping(value = "/book/{id}")
+    @PatchMapping(value = "/book{id}")
     public ResponseEntity<BookDto> withdrawnBook(@RequestParam Long id) {
         logger.info("Started withdrawnBook in BookController.");
         try {
@@ -117,7 +117,7 @@ public class BookController {
         }
     }
 
-    @PatchMapping(value = "/changebookstatus/{id&status}")
+    @PatchMapping(value = "/changebookstatus{id&status}")
     public ResponseEntity<BookDto> changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
         logger.info("Started changeBookStatus in BookController.");
         try {
