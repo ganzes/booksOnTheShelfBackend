@@ -33,7 +33,7 @@ public class ReaderService {
         logger.info("Started createReader in ReaderRepository");
 
         Optional<Reader> optionalReader = readerRepository.findById(reader.getId());
-        if (!optionalReader.isPresent()) {
+        if (optionalReader.isEmpty()) {
             return readerRepository.save(reader);
         }
         return reader;

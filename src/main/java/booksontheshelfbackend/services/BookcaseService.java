@@ -21,7 +21,7 @@ public class BookcaseService {
 
     public Bookcase createBookcase(Bookcase bookcase) {
         Optional<Bookcase> optionalBookcase = bookcaseRepository.findById(bookcase.getId());
-        if (!optionalBookcase.isPresent()) {
+        if (optionalBookcase.isEmpty()) {
             return bookcaseRepository.save(bookcase);
         }
         return bookcase;

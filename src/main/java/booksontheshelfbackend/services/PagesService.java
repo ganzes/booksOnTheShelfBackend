@@ -32,7 +32,7 @@ public class PagesService {
         logger.info("Started createPages in PagesRepository");
 
         Optional<Pages> optionalPages = pagesRepository.findById(pages.getId());
-        if (!optionalPages.isPresent()) {
+        if (optionalPages.isEmpty()) {
             return pagesRepository.save(pages);
         }
         return pages;

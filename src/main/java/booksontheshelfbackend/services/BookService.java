@@ -17,7 +17,7 @@ public class BookService {
 
     public Book createBook(Book book) {
         Optional<Book> optionalBook = bookRepository.findById(book.getId());
-        if (!optionalBook.isPresent()) {
+        if (optionalBook.isEmpty()) {
             return bookRepository.save(book);
         }
         return book;
