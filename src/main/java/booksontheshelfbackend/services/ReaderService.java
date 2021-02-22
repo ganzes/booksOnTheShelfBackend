@@ -63,6 +63,8 @@ public class ReaderService {
     }
 
     public Reader addPagesToReader(final Long id, final Long numberOfPages) {
+        logger.info("Started addPagesToReader in ReaderRepository");
+
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
 
         Pages optionalPage = new Pages();
@@ -74,6 +76,8 @@ public class ReaderService {
     }
 
     public Long countAllPagesInReader(final Long id) {
+        logger.info("Started countAllPagesInReader in ReaderRepository");
+
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
         return optionalReader.getPages().stream().mapToLong(Pages::getPagesRead).sum();
     }
