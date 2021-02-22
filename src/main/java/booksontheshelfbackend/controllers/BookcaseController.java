@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin()
 @RestController
 @RequestMapping("/botsab")
 public class BookcaseController {
