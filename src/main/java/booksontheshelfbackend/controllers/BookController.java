@@ -24,6 +24,7 @@ public class BookController {
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     private static final String INVALID = "Invalid ";
     private static final String SUCCESS = " succeed in BookController.";
+    private static final String FAILED = " failed in BookController.";
 
     @Autowired
     private BookMapper bookMapper;
@@ -35,10 +36,10 @@ public class BookController {
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
         logger.info("Started createBook in BookController.");
         try {
-            logger.info("createBook "+ SUCCESS);
+            logger.info("createBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed createBook in BookController!");
+            logger.warn("createBook " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -47,10 +48,10 @@ public class BookController {
     public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) {
         logger.info("Started updateBook in BookController.");
         try {
-            logger.info("updateBook "+ SUCCESS);
+            logger.info("updateBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed updateBook in BookController!");
+            logger.warn("updateBook " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -59,10 +60,10 @@ public class BookController {
     public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
         try {
-            logger.info("getBook "+ SUCCESS);
+            logger.info("getBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.findBookById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getBook in BookController!");
+            logger.warn("getBook " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -71,10 +72,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getAllBooks() {
         logger.info("Started getAllBooks in BookController.");
         try {
-            logger.info("getAllBooks "+ SUCCESS);
+            logger.info("getAllBooks " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.getAllBooks()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getAllBooks in BookController!");
+            logger.warn("getAllBooks " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -84,10 +85,10 @@ public class BookController {
         logger.info("Started deleteBook in BookController.");
         try {
             bookService.deleteBook(id);
-            logger.info("deleteBook "+ SUCCESS);
+            logger.info("deleteBook " + SUCCESS);
             return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | NoSuchElementException | HttpServerErrorException e) {
-            logger.warn("Failed deleteBook in BookController!");
+            logger.warn("deleteBook " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -97,10 +98,10 @@ public class BookController {
         logger.info("Started withdrawnBook in BookController.");
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-            logger.info("withdrawnBook "+ SUCCESS);
+            logger.info("withdrawnBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.withdrawnBook(bookMapper.mapToBook(bookDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed withdrawnBook in BookController!");
+            logger.warn("withdrawnBook " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -109,10 +110,10 @@ public class BookController {
     public ResponseEntity<Long> countBooks() {
         logger.info("Started countBooks in BookController.");
         try {
-            logger.info("countBooks "+ SUCCESS);
+            logger.info("countBooks " + SUCCESS);
             return ResponseEntity.ok(bookService.countBooks());
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed countBooks in BookController!");
+            logger.warn("countBooks " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -122,10 +123,10 @@ public class BookController {
         logger.info("Started changeBookStatus in BookController.");
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
-            logger.info("changeBookStatus "+ SUCCESS);
+            logger.info("changeBookStatus " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.changeBookStatus(bookMapper.mapToBook(bookDto), status)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed countBooks in BookController!");
+            logger.warn("changeBookStatus " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -134,10 +135,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
         try {
-            logger.info("findBookByStatus "+ SUCCESS);
+            logger.info("findBookByStatus " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByStatus(bookStatus)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByStatus in BookController!");
+            logger.warn("findBookByStatus " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -146,10 +147,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsTrue() {
         logger.info("Started findBookByWithdrawnIsTrue in BookController.");
         try {
-            logger.info("findBookByWithdrawnIsTrue "+ SUCCESS);
+            logger.info("findBookByWithdrawnIsTrue " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsTrue()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByWithdrawnIsTrue in BookController!");
+            logger.warn("findBookByWithdrawnIsTrue " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -158,10 +159,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsFalse() {
         logger.info("Started findBookByWithdrawnIsFalse in BookController.");
         try {
-            logger.info("findBookByWithdrawnIsFalse "+ SUCCESS);
+            logger.info("findBookByWithdrawnIsFalse " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsFalse()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByWithdrawnIsFalse in BookController!");
+            logger.warn("findBookByWithdrawnIsFalse " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -170,10 +171,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByWithdrawn(boolean oneZero) {
         logger.info("Started findBookByWithdrawn in BookController.");
         try {
-            logger.info("findBookByWithdrawn "+ SUCCESS);
+            logger.info("findBookByWithdrawn " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawn(oneZero)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByWithdrawn in BookController!");
+            logger.warn("findBookByWithdrawn " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -182,10 +183,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByAuthor(String author) {
         logger.info("Started findBookByAuthor in BookController.");
         try {
-            logger.info("findBookByAuthor "+ SUCCESS);
+            logger.info("findBookByAuthor " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByAuthor(author)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByAuthor in BookController!");
+            logger.warn("findBookByAuthor " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -194,10 +195,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByTitle(String title) {
         logger.info("Started findBookByTitle in BookController.");
         try {
-            logger.info("findBookByTitle "+ SUCCESS);
+            logger.info("findBookByTitle " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByTitle(title)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByTitle in BookController!");
+            logger.warn("findBookByTitle " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -206,10 +207,10 @@ public class BookController {
     public ResponseEntity<List<BookDto>> findBookByPublisher(String publisher) {
         logger.info("Started findBookByPublisher in BookController.");
         try {
-            logger.info("findBookByPublisher "+ SUCCESS);
+            logger.info("findBookByPublisher " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByPublisher(publisher)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookByPublisher in BookController!");
+            logger.warn("findBookByPublisher " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
