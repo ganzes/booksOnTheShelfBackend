@@ -74,7 +74,7 @@ public class BookcaseController {
     }
 
     @GetMapping(value = "/bookcases")
-    private ResponseEntity<List<BookcaseDto>> getAllBookcases() {
+    public ResponseEntity<List<BookcaseDto>> getAllBookcases() {
         logger.info("Started getAllBookcases in BookcaseController.");
         try {
             logger.info("getAllBookcases " + SUCCESS);

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class BookService {
+
     public static final Logger logger = LoggerFactory.getLogger(BookService.class);
 
     @Autowired
@@ -100,37 +101,37 @@ public class BookService {
         return bookRepository.findBookByBookStatusEnum(bookStatus);
     }
 
-    public List<Book> findBookByWithdrawnIsTrue(){
+    public List<Book> findBookByWithdrawnIsTrue() {
         logger.info("Started findBookByWithdrawnIsTrue in BookService");
 
         return bookRepository.findBookByWithdrawnIsTrue();
     }
 
-    public List<Book> findBookByWithdrawnIsFalse(){
+    public List<Book> findBookByWithdrawnIsFalse() {
         logger.info("Started findBookByWithdrawnIsFalse in BookService");
 
         return bookRepository.findBookByWithdrawnIsFalse();
     }
 
-    public List<Book> findBookByWithdrawn(boolean oneZero){
+    public List<Book> findBookByWithdrawn(boolean oneZero) {
         logger.info("Started findBookByWithdrawn in BookService");
 
         return bookRepository.findBookByWithdrawn(oneZero);
     }
 
-    public List<Book> findBookByAuthor(String author){
+    public List<Book> findBookByAuthor(String author) {
         logger.info("Started findBookByAuthor in BookService");
 
         return bookRepository.findBookByAuthor(author);
     }
 
-    public List<Book> findBookByTitle(String title){
+    public List<Book> findBookByTitle(String title) {
         logger.info("Started findBookByTitle in BookService");
 
         return bookRepository.findBookByTitle(title);
     }
 
-    public List<Book> findBookByPublisher(String publisher){
+    public List<Book> findBookByPublisher(String publisher) {
         logger.info("Started findBookByPublisher in BookService");
 
         return bookRepository.findBookByPublisher(publisher);
