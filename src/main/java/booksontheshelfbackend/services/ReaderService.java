@@ -24,13 +24,13 @@ public class ReaderService {
     private PagesRepository pagesRepository;
 
     public List<Reader> getAllReaders() {
-        logger.info("Started getAllReaders in ReaderRepository");
+        logger.info("Started getAllReaders in ReaderService");
 
         return readerRepository.findAll();
     }
 
     public Reader createReader(Reader reader) {
-        logger.info("Started createReader in ReaderRepository");
+        logger.info("Started createReader in ReaderService");
 
         Optional<Reader> optionalReader = readerRepository.findById(reader.getId());
         if (optionalReader.isEmpty()) {
@@ -40,7 +40,7 @@ public class ReaderService {
     }
 
     public Reader updateReader(Reader reader) {
-        logger.info("Started updateReader in ReaderRepository");
+        logger.info("Started updateReader in ReaderService");
 
         Optional<Reader> optionalReader = readerRepository.findById(reader.getId());
         if (optionalReader.isPresent()) {
@@ -50,20 +50,20 @@ public class ReaderService {
     }
 
     public Reader findReaderById(Long id) {
-        logger.info("Started findReaderById in ReaderRepository");
+        logger.info("Started findReaderById in ReaderService");
 
         return readerRepository.findById(id).orElseThrow();
     }
 
     public void deleteReader(Long id) {
-        logger.info("Started deleteReader in ReaderRepository");
+        logger.info("Started deleteReader in ReaderService");
 
         Reader deleteReader = readerRepository.findById(id).orElseThrow();
         readerRepository.delete(deleteReader);
     }
 
     public Reader addPagesToReader(final Long id, final Long numberOfPages) {
-        logger.info("Started addPagesToReader in ReaderRepository");
+        logger.info("Started addPagesToReader in ReaderService");
 
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
 
@@ -76,7 +76,7 @@ public class ReaderService {
     }
 
     public Long countAllPagesInReader(final Long id) {
-        logger.info("Started countAllPagesInReader in ReaderRepository");
+        logger.info("Started countAllPagesInReader in ReaderService");
 
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
         return optionalReader.getPages().stream().mapToLong(Pages::getPagesRead).sum();
