@@ -22,6 +22,7 @@ public class ReaderController {
     private static final Logger logger = LoggerFactory.getLogger(ReaderController.class);
     private static final String INVALID = "Invalid ";
     private static final String SUCCESS = " succeed in ReaderController.";
+    private static final String FAILED = " failed in BookController.";
 
     @Autowired
     private ReaderMapper readerMapper;
@@ -37,7 +38,7 @@ public class ReaderController {
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.createReader
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed createReader in ReaderController!");
+            logger.warn("createReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -50,7 +51,7 @@ public class ReaderController {
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.updateReader
                     (readerMapper.mapToReader(readerDto))));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed updateReader ContactController!");
+            logger.warn("updateReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -62,7 +63,7 @@ public class ReaderController {
             logger.info("getAllReaders " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDtoList(readerService.getAllReaders()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getAllReaders ContactController!");
+            logger.warn("getAllReaders " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -74,7 +75,7 @@ public class ReaderController {
             logger.info("getReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.findReaderById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getReader ContactController!");
+            logger.warn("getReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -87,7 +88,7 @@ public class ReaderController {
             readerService.deleteReader(id);
             return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed deleteReader ContactController!");
+            logger.warn("deleteReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -99,7 +100,7 @@ public class ReaderController {
             logger.info("addPagesToReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addPagesToReader(id, numberOfPages)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed addPagesToReader ContactController!");
+            logger.warn("addPagesToReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -111,7 +112,7 @@ public class ReaderController {
             logger.info("countPagesReadInReader " + SUCCESS);
             return ResponseEntity.ok(readerService.countAllPagesInReader(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed addPagesToReader ContactController!");
+            logger.warn("countPagesReadInReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
