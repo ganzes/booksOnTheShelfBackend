@@ -23,6 +23,7 @@ public class BookcaseController {
     private static final Logger logger = LoggerFactory.getLogger(BookcaseController.class);
     private static final String INVALID = "Invalid ";
     private static final String SUCCESS = " succeed in BookcaseController.";
+    private static final String FAILED = " failed in BookcaseController.";
 
     @Autowired
     private BookcaseMapper bookcaseMapper;
@@ -43,7 +44,7 @@ public class BookcaseController {
                 logger.warn("Failure createBookcase in BookcaseController, Bookcase exist.");
             }
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed createBookcase in BookcaseController!");
+            logger.warn("createBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -61,11 +62,11 @@ public class BookcaseController {
                 return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
             } catch (HttpServerErrorException e) {
                 logger.error("Exception " + e);
-                logger.warn("Failure updateBookcase in BookcaseController.");
+                logger.warn("updateBookcase " + FAILED);
             }
         } else if (!bookcaseService.existById(bookcaseDto.getId())) {
             logger.info("NOT EXIST");
-            logger.warn("Failure updateBookcase in BookcaseController.");
+            logger.warn("updateBookcase " + FAILED);
             return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
         }
 
@@ -80,7 +81,7 @@ public class BookcaseController {
             logger.info("getAllBookcases " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases()));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getAllBookcases in BookcaseController!");
+            logger.warn("getAllBookcases " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -92,7 +93,7 @@ public class BookcaseController {
             logger.info("getBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed getBookcase in BookcaseController!");
+            logger.warn("getBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -103,9 +104,9 @@ public class BookcaseController {
         try {
             logger.info("deleteBookcase " + SUCCESS);
             bookcaseService.deleteBookcase(id);
-           return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed deleteBookcase in BookcaseController!");
+            logger.warn("deleteBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -117,7 +118,7 @@ public class BookcaseController {
             logger.info("addBookToBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.addBookToBookcase(id, bookId)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed addBookToBookcase in BookcaseController!");
+            logger.warn("addBookToBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -129,7 +130,7 @@ public class BookcaseController {
             logger.info("countBooksInBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseService.countBooksInBookcase(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed countBooksInBookcase in BookcaseController!");
+            logger.warn("countBooksInBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
@@ -141,7 +142,7 @@ public class BookcaseController {
             logger.info("findBookcaseByTag " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.findBookcaseByTag(tag)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
-            logger.warn("Failed findBookcaseByTag in BookcaseController!");
+            logger.warn("findBookcaseByTag " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
