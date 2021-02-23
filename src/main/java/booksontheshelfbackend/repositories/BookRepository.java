@@ -17,11 +17,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBookByBookStatusEnum(String bookStatus);
 
-    List <Book> findBookByWithdrawnIsTrue();
+    List<Book> findBookByWithdrawnIsTrue();
 
-    List <Book> findBookByWithdrawnIsFalse();
+    List<Book> findBookByWithdrawnIsFalse();
 
-    List <Book> findBookByWithdrawn(boolean oneZero);
+    List<Book> findBookByWithdrawn(boolean oneZero);
 
     List<Book> findBookByAuthor(String author);
 
