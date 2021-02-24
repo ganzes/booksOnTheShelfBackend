@@ -35,5 +35,6 @@ Original web-based application allowing readers to change their books status, re
 
 **Preview:**
 
-[Front-End: heroku](http://books-on-the-shelf.herokuapp.com)
-[Back-End: heroku (swagger)](https://booksontheshelfbackend.herokuapp.com/swagger-ui.html)
+* [Front-End: heroku](http://books-on-the-shelf.herokuapp.com)
+
+* [Back-End: heroku (swagger)](https://booksontheshelfbackend.herokuapp.com/swagger-ui.html)
