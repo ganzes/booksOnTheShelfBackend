@@ -23,7 +23,7 @@ Original web-based application allowing readers to change their books status, re
 * JavaScript(ES6+), SCSS, npm
 * Design system: Material UI
 * (server for Heroku: Node.js, express.js)
-* Test coverage - minimum 75%
+* Test coverage - target 75%
 
 **Tools:**
 * Version control system: GIT
