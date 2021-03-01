@@ -24,7 +24,7 @@ public class BookcaseService {
     private BookRepository bookRepository;
 
     public Bookcase createBookcase(Bookcase bookcase) {
-        logger.info("Started createBook in BookcaseService");
+        logger.info("Started createBookcase in BookcaseService");
 
         Optional<Bookcase> optionalBookcase = bookcaseRepository.findById(bookcase.getId());
         if (optionalBookcase.isEmpty()) {

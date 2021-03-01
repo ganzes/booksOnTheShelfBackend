@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
@@ -113,6 +114,19 @@ public class ReaderController {
             return ResponseEntity.ok(readerService.countAllPagesInReader(id));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("countPagesReadInReader " + FAILED);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
+    @PutMapping(value = "/addbooktoreader{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ReaderDto> addBookToReader(@RequestParam Long id, @RequestParam Long bookId){
+        logger.info("Started addBookToReader in ReaderController.");
+
+        try {
+            logger.info("addBookToReader " + SUCCESS);
+            return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addBookToReader(id,bookId)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("addBookToReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }

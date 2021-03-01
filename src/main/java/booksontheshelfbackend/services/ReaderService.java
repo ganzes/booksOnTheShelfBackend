@@ -1,7 +1,11 @@
 package booksontheshelfbackend.services;
 
+import booksontheshelfbackend.entities.Book;
+import booksontheshelfbackend.entities.Bookcase;
 import booksontheshelfbackend.entities.Pages;
 import booksontheshelfbackend.entities.Reader;
+import booksontheshelfbackend.repositories.BookRepository;
+import booksontheshelfbackend.repositories.BookcaseRepository;
 import booksontheshelfbackend.repositories.PagesRepository;
 import booksontheshelfbackend.repositories.ReaderRepository;
 import org.slf4j.Logger;
@@ -22,6 +26,12 @@ public class ReaderService {
 
     @Autowired
     private PagesRepository pagesRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private BookcaseRepository bookcaseRepository;
 
     public List<Reader> getAllReaders() {
         logger.info("Started getAllReaders in ReaderService");
@@ -80,5 +90,18 @@ public class ReaderService {
 
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
         return optionalReader.getPages().stream().mapToLong(Pages::getPagesRead).sum();
+    }
+
+    public Reader addBookToReader(final Long id, Long bookId){
+        logger.info("Started addBookToReader in ReaderService");
+
+        Reader optionalReader = readerRepository.findById(id).orElseThrow();
+        Book addBook = bookRepository.findById(bookId).orElse(null);
+
+        assert addBook != null;
+        addBook.setReader(optionalReader);
+        bookRepository.save(addBook);
+
+        return readerRepository.save(optionalReader);
     }
 }
