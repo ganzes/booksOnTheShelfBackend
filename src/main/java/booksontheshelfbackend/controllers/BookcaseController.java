@@ -34,6 +34,7 @@ public class BookcaseController {
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started createBookcase in BookcaseController.");
+
         try {
             if (!bookcaseService.existById(bookcaseDto.getId())) {
                 logger.info("Bookcase does not exist in createBookcase in BookcaseController.");
@@ -52,6 +53,7 @@ public class BookcaseController {
     @PutMapping(value = "/bookcase")
     public BookcaseDto updateBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started updateBookcase in BookcaseController.");
+
         if (bookcaseDto.getId() == 0) {
             logger.info("0 updateBookcase in BookcaseController.");
             return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
@@ -71,12 +73,14 @@ public class BookcaseController {
         }
 
         logger.info("Ended updateBookcase in BookcaseController.");
+
         return bookcaseMapper.mapToBookcaseDto(bookcaseService.updateBookcase(bookcaseMapper.mapToBookcase(bookcaseDto)));
     }
 
     @GetMapping(value = "/bookcases")
     public ResponseEntity<List<BookcaseDto>> getAllBookcases() {
         logger.info("Started getAllBookcases in BookcaseController.");
+
         try {
             logger.info("getAllBookcases " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.getAllBookcases()));
@@ -89,6 +93,7 @@ public class BookcaseController {
     @GetMapping(value = "/bookcase{id}")
     public ResponseEntity<BookcaseDto> getBookcase(@RequestParam Long id) {
         logger.info("Started getBookcase in BookcaseController.");
+
         try {
             logger.info("getBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.findBookcaseById(id)));
@@ -101,6 +106,7 @@ public class BookcaseController {
     @DeleteMapping(value = "/bookcase{id}")
     public ResponseEntity<Void> deleteBookcase(@RequestParam Long id) {
         logger.info("Started deleteBookcase in BookcaseController.");
+
         try {
             logger.info("deleteBookcase " + SUCCESS);
             bookcaseService.deleteBookcase(id);
@@ -114,6 +120,7 @@ public class BookcaseController {
     @PutMapping(value = "/bookcasebook{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookcaseDto> addBookToBookcase(@RequestParam Long id, @RequestParam Long bookId) {
         logger.info("Started addBookToBookcase in BookcaseController.");
+
         try {
             logger.info("addBookToBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto(bookcaseService.addBookToBookcase(id, bookId)));
@@ -126,6 +133,7 @@ public class BookcaseController {
     @GetMapping(value = "/booksinbookcase")
     public ResponseEntity<Long> countBooksInBookcase(@RequestParam Long id) {
         logger.info("Started countBooksInBookcase in BookcaseController.");
+
         try {
             logger.info("countBooksInBookcase " + SUCCESS);
             return ResponseEntity.ok(bookcaseService.countBooksInBookcase(id));
@@ -138,6 +146,7 @@ public class BookcaseController {
     @GetMapping(value = "/findbookcasebytag{tag}")
     public ResponseEntity<List<BookcaseDto>> findBookcaseByTag(@RequestParam String tag) {
         logger.info("Started findBookcaseByTag in BookcaseController.");
+
         try {
             logger.info("findBookcaseByTag " + SUCCESS);
             return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDtoList(bookcaseService.findBookcaseByTag(tag)));
