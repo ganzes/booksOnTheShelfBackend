@@ -92,7 +92,7 @@ public class ReaderService {
         return optionalReader.getPages().stream().mapToLong(Pages::getPagesRead).sum();
     }
 
-    public Reader addBookToReader(final Long id, Long bookId){
+    public Reader addBookToReader(final Long id, Long bookId) {
         logger.info("Started addBookToReader in ReaderService");
 
         Reader optionalReader = readerRepository.findById(id).orElseThrow();
@@ -101,6 +101,19 @@ public class ReaderService {
         assert addBook != null;
         addBook.setReader(optionalReader);
         bookRepository.save(addBook);
+
+        return readerRepository.save(optionalReader);
+    }
+
+    public Reader addBookcaseToReader(final Long id, Long bookcaseId) {
+        logger.info("Started addBookcaseToReader in ReaderService");
+
+        Reader optionalReader = readerRepository.findById(id).orElseThrow();
+        Bookcase addBookcase = bookcaseRepository.findById(bookcaseId).orElse(null);
+
+        assert addBookcase != null;
+        addBookcase.setReader(optionalReader);
+        bookcaseRepository.save(addBookcase);
 
         return readerRepository.save(optionalReader);
     }

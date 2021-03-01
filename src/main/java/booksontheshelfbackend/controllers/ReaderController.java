@@ -34,6 +34,7 @@ public class ReaderController {
     @PostMapping(value = "/reader")
     public ResponseEntity<ReaderDto> createReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started createReader in ReaderController.");
+
         try {
             logger.info("createReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.createReader
@@ -47,6 +48,7 @@ public class ReaderController {
     @PutMapping(value = "/reader")
     public ResponseEntity<ReaderDto> updateReader(@RequestBody ReaderDto readerDto) {
         logger.info("Started updateReader in ReaderController.");
+
         try {
             logger.info("updateReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.updateReader
@@ -60,6 +62,7 @@ public class ReaderController {
     @GetMapping(value = "/readers")
     public ResponseEntity<List<ReaderDto>> getAllReaders() {
         logger.info("Started getAllReaders in ReaderController.");
+
         try {
             logger.info("getAllReaders " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDtoList(readerService.getAllReaders()));
@@ -72,6 +75,7 @@ public class ReaderController {
     @GetMapping(value = "/reader{id}")
     public ResponseEntity<ReaderDto> getReader(@RequestParam Long id) {
         logger.info("Started getReader in BookController.");
+
         try {
             logger.info("getReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.findReaderById(id)));
@@ -84,6 +88,7 @@ public class ReaderController {
     @DeleteMapping(value = "/reader{id}")
     public ResponseEntity<Void> deleteReader(@RequestParam Long id) {
         logger.info("Started deleteReader in ReaderController.");
+
         try {
             logger.info("deleteReader " + SUCCESS);
             readerService.deleteReader(id);
@@ -97,6 +102,7 @@ public class ReaderController {
     @PatchMapping(value = "/reader{id&numberOfPages}")
     public ResponseEntity<ReaderDto> addPagesToReader(@RequestParam Long id, @RequestParam Long numberOfPages) {
         logger.info("Started addPagesToReader in ReaderController.");
+
         try {
             logger.info("addPagesToReader " + SUCCESS);
             return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addPagesToReader(id, numberOfPages)));
@@ -109,6 +115,7 @@ public class ReaderController {
     @GetMapping(value = "/readercountpagesread{id}")
     public ResponseEntity<Long> countPagesReadInReader(@RequestParam Long id) {
         logger.info("Started countPagesReadInReader in ReaderController.");
+
         try {
             logger.info("countPagesReadInReader " + SUCCESS);
             return ResponseEntity.ok(readerService.countAllPagesInReader(id));
@@ -119,14 +126,27 @@ public class ReaderController {
     }
 
     @PutMapping(value = "/addbooktoreader{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ReaderDto> addBookToReader(@RequestParam Long id, @RequestParam Long bookId){
+    public ResponseEntity<ReaderDto> addBookToReader(@RequestParam Long id, @RequestParam Long bookId) {
         logger.info("Started addBookToReader in ReaderController.");
 
         try {
             logger.info("addBookToReader " + SUCCESS);
-            return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addBookToReader(id,bookId)));
+            return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addBookToReader(id, bookId)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("addBookToReader " + FAILED);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
+    @PutMapping(value = "/addbookcasetoreader{bookId&id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ReaderDto> addBookcaseToReader(@RequestParam Long id, @RequestParam Long bookcaseId) {
+        logger.info("Started addBookcaseToReader in ReaderController.");
+
+        try {
+            logger.info("addBookcaseToReader " + SUCCESS);
+            return ResponseEntity.ok(readerMapper.mapToReaderDto(readerService.addBookcaseToReader(id, bookcaseId)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("addBookcaseToReader " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }
