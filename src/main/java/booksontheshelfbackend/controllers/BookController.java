@@ -35,6 +35,7 @@ public class BookController {
     @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
         logger.info("Started createBook in BookController.");
+
         try {
             logger.info("createBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto))));
@@ -47,6 +48,7 @@ public class BookController {
     @PutMapping(value = "/book")
     public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) {
         logger.info("Started updateBook in BookController.");
+
         try {
             logger.info("updateBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.updateBook(bookMapper.mapToBook(bookDto))));
@@ -59,6 +61,7 @@ public class BookController {
     @GetMapping(value = "/book{id}")
     public ResponseEntity<BookDto> getBook(@RequestParam Long id) {
         logger.info("Started getBook in BookController.");
+
         try {
             logger.info("getBook " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.findBookById(id)));
@@ -71,6 +74,7 @@ public class BookController {
     @GetMapping(value = "/books")
     public ResponseEntity<List<BookDto>> getAllBooks() {
         logger.info("Started getAllBooks in BookController.");
+
         try {
             logger.info("getAllBooks " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.getAllBooks()));
@@ -83,6 +87,7 @@ public class BookController {
     @DeleteMapping(value = "/book{id}")
     public ResponseEntity<Void> deleteBook(@RequestParam Long id) {
         logger.info("Started deleteBook in BookController.");
+
         try {
             bookService.deleteBook(id);
             logger.info("deleteBook " + SUCCESS);
@@ -96,6 +101,7 @@ public class BookController {
     @PatchMapping(value = "/book{id}")
     public ResponseEntity<BookDto> withdrawnBook(@RequestParam Long id) {
         logger.info("Started withdrawnBook in BookController.");
+
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
             logger.info("withdrawnBook " + SUCCESS);
@@ -109,6 +115,7 @@ public class BookController {
     @GetMapping(value = "/booksc")
     public ResponseEntity<Long> countBooks() {
         logger.info("Started countBooks in BookController.");
+
         try {
             logger.info("countBooks " + SUCCESS);
             return ResponseEntity.ok(bookService.countBooks());
@@ -121,6 +128,7 @@ public class BookController {
     @PatchMapping(value = "/changebookstatus{id&status}")
     public ResponseEntity<BookDto> changeBookStatus(@RequestParam Long id, @RequestParam Long status) {
         logger.info("Started changeBookStatus in BookController.");
+
         try {
             BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
             logger.info("changeBookStatus " + SUCCESS);
@@ -134,6 +142,7 @@ public class BookController {
     @GetMapping(value = "/books{bookStatusEnum)}")
     public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
+
         try {
             logger.info("findBookByStatus " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByStatus(bookStatus)));
@@ -146,6 +155,7 @@ public class BookController {
     @GetMapping(value = "/bookswithdrawnedtrue")
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsTrue() {
         logger.info("Started findBookByWithdrawnIsTrue in BookController.");
+
         try {
             logger.info("findBookByWithdrawnIsTrue " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsTrue()));
@@ -158,6 +168,7 @@ public class BookController {
     @GetMapping(value = "/bookswithdrawnedfalse")
     public ResponseEntity<List<BookDto>> findBookByWithdrawnIsFalse() {
         logger.info("Started findBookByWithdrawnIsFalse in BookController.");
+
         try {
             logger.info("findBookByWithdrawnIsFalse " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawnIsFalse()));
@@ -170,6 +181,7 @@ public class BookController {
     @GetMapping(value = "/bookswithdrawned{oneZero}")
     public ResponseEntity<List<BookDto>> findBookByWithdrawn(boolean oneZero) {
         logger.info("Started findBookByWithdrawn in BookController.");
+
         try {
             logger.info("findBookByWithdrawn " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByWithdrawn(oneZero)));
@@ -182,6 +194,7 @@ public class BookController {
     @GetMapping(value = "/findbookbyauthor{author}")
     public ResponseEntity<List<BookDto>> findBookByAuthor(String author) {
         logger.info("Started findBookByAuthor in BookController.");
+
         try {
             logger.info("findBookByAuthor " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByAuthor(author)));
@@ -194,6 +207,7 @@ public class BookController {
     @GetMapping(value = "/findbookbytitle{title}")
     public ResponseEntity<List<BookDto>> findBookByTitle(String title) {
         logger.info("Started findBookByTitle in BookController.");
+
         try {
             logger.info("findBookByTitle " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByTitle(title)));
@@ -206,6 +220,7 @@ public class BookController {
     @GetMapping(value = "/findbookbypublisher{publisher}")
     public ResponseEntity<List<BookDto>> findBookByPublisher(String publisher) {
         logger.info("Started findBookByPublisher in BookController.");
+
         try {
             logger.info("findBookByPublisher " + SUCCESS);
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByPublisher(publisher)));
