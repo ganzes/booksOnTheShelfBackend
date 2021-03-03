@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -35,10 +36,9 @@ public class UploadService implements UploadRepository {
                 throw new UploadFileNotFoundException("Failed to store empty file.");
             }
             Path destinationFile = this.rootLocation.resolve(
-                    Paths.get(file.getOriginalFilename()))
+                    Paths.get(Objects.requireNonNull(file.getOriginalFilename())))
                     .normalize().toAbsolutePath();
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-                // This is a security check
                 throw new UploadFileNotFoundException(
                         "Cannot store file outside current directory.");
             }
@@ -46,8 +46,7 @@ public class UploadService implements UploadRepository {
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new UploadFileNotFoundException("Failed to store file.", e);
         }
     }
@@ -58,11 +57,9 @@ public class UploadService implements UploadRepository {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new UploadFileNotFoundException("Failed to read stored files", e);
         }
-
     }
 
     @Override
@@ -77,14 +74,11 @@ public class UploadService implements UploadRepository {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new UploadFileNotFoundException(
                         "Could not read file: " + filename);
-
             }
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new UploadFileNotFoundException("Could not read file: " + filename, e);
         }
     }
@@ -98,8 +92,7 @@ public class UploadService implements UploadRepository {
     public void init() {
         try {
             Files.createDirectories(rootLocation);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new UploadFileNotFoundException("Could not initialize storage", e);
         }
     }
