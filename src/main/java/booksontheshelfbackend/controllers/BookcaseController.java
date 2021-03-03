@@ -32,22 +32,23 @@ public class BookcaseController {
     private BookcaseService bookcaseService;
 
     @PostMapping(value = "/bookcase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createBookcase(@RequestBody BookcaseDto bookcaseDto) {
+    public ResponseEntity<BookcaseDto> createBookcase(@RequestBody BookcaseDto bookcaseDto) {
         logger.info("Started createBookcase in BookcaseController.");
 
         try {
             if (!bookcaseService.existById(bookcaseDto.getId())) {
                 logger.info("Bookcase does not exist in createBookcase in BookcaseController.");
                 logger.info("createBookcase " + SUCCESS);
-                ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto
+                return ResponseEntity.ok(bookcaseMapper.mapToBookcaseDto
                         (bookcaseService.createBookcase(bookcaseMapper.mapToBookcase(bookcaseDto))));
-            } else {
+            } else if (bookcaseService.existById(bookcaseDto.getId())){
                 logger.warn("Failure createBookcase in BookcaseController, Bookcase exist.");
             }
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("createBookcase " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
+        return null;
     }
 
     @PutMapping(value = "/bookcase")
