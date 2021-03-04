@@ -33,7 +33,7 @@ public class UploadFileController {
         this.storageRepository = storageRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/getuploadfiles")
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageRepository.loadAll().map(
@@ -44,7 +44,7 @@ public class UploadFileController {
         return "uploadForm";
     }
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/files/{filename}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
@@ -53,7 +53,7 @@ public class UploadFileController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @PostMapping("/")
+    @PostMapping("/handlefile")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
 
