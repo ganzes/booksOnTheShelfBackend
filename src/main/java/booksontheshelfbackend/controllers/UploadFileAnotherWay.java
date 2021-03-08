@@ -10,19 +10,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/botsab")
 public class UploadFileAnotherWay {
 
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @PostMapping(value = "/uploadFile")
     public String submitFile(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
         modelMap.addAttribute("file", file);
         return "fileUploadView";
     }
 
-    @RequestMapping(value = "/uploadMultiFile", method = RequestMethod.POST)
+    @PostMapping(value = "/uploadMultiFile")
     public String submitMultiFile(@RequestParam("files") MultipartFile[] files, ModelMap modelMap) {
         modelMap.addAttribute("files", files);
         return "fileUploadView";
     }
 
-    @PostMapping("/uploadFileWithAddtionalData")
+    @PostMapping(value ="/uploadFileWithAddtionalData")
     public String submitFileWithAddtionalData(
             @RequestParam MultipartFile file, @RequestParam String name,
             @RequestParam String email, ModelMap modelMap) {
@@ -33,7 +33,7 @@ public class UploadFileAnotherWay {
         return "fileUploadView";
     }
 
-    @PostMapping("/uploadFileModelAttribute")
+    @PostMapping(value ="/uploadFileModelAttribute")
     public String submitileModelAttribute(@ModelAttribute FormDataWithFile formDataWithFile, ModelMap modelMap) {
 
         modelMap.addAttribute("formDataWithFile", formDataWithFile);
