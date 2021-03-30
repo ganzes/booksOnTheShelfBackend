@@ -2,6 +2,7 @@ package booksontheshelfbackend.dtos;
 
 import booksontheshelfbackend.entities.Bookcase;
 import booksontheshelfbackend.entities.Reader;
+import booksontheshelfbackend.enums.BookRatingEnum;
 import booksontheshelfbackend.enums.BookStatusEnum;
 
 public class BookDto {
@@ -13,6 +14,7 @@ public class BookDto {
     private String publisher;
     private String comment;
     private BookStatusEnum bookStatusEnum;
+    private BookRatingEnum bookRatingEnum;
     private boolean withdrawn;
     private Bookcase bookcase;
     private Reader reader;
@@ -20,8 +22,9 @@ public class BookDto {
     public BookDto() {
     }
 
-    public BookDto(long id, String author, String title, long pages, String publisher, String comment, BookStatusEnum bookStatusEnum,
-                   boolean withdrawn, Bookcase bookcase, Reader reader) {
+    public BookDto(long id, String author, String title, long pages, String publisher, String comment,
+                   BookStatusEnum bookStatusEnum, BookRatingEnum bookRatingEnum, boolean withdrawn,
+                   Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -29,6 +32,7 @@ public class BookDto {
         this.publisher = publisher;
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
+        this.bookRatingEnum = bookRatingEnum;
         this.withdrawn = withdrawn;
         this.bookcase = bookcase;
         this.reader = reader;
@@ -60,6 +64,10 @@ public class BookDto {
 
     public BookStatusEnum getBookStatusEnum() {
         return bookStatusEnum;
+    }
+
+    public BookRatingEnum getBookRatingEnum() {
+        return bookRatingEnum;
     }
 
     public boolean isWithdrawn() {
@@ -100,6 +108,10 @@ public class BookDto {
 
     public void setBookStatusEnum(BookStatusEnum bookStatusEnum) {
         this.bookStatusEnum = bookStatusEnum;
+    }
+
+    public void setBookRatingEnum(BookRatingEnum bookRatingEnum) {
+        this.bookRatingEnum = bookRatingEnum;
     }
 
     public void setWithdrawn(boolean withdrawn) {

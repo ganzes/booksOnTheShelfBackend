@@ -139,6 +139,20 @@ public class BookController {
         }
     }
 
+    @PatchMapping(value = "/changebookrating{id&rating}")
+    public ResponseEntity<BookDto> changeBookRating(@RequestParam Long id, @RequestParam Long rating) {
+        logger.info("Started changeBookRating in BookController.");
+
+        try {
+            BookDto bookDto = bookMapper.mapToBookDto(bookService.findBookById(id));
+            logger.info("changeBookRating " + SUCCESS);
+            return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.changeBookRating(bookMapper.mapToBook(bookDto), rating)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("changeBookRating " + FAILED);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
     @GetMapping(value = "/books{bookStatusEnum)}")
     public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam String bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
@@ -226,6 +240,19 @@ public class BookController {
             return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByPublisher(publisher)));
         } catch (ResponseStatusException | HttpServerErrorException e) {
             logger.warn("findBookByPublisher " + FAILED);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
+        }
+    }
+
+    @GetMapping(value = "/findbookbyrating{rating}")
+    public ResponseEntity<List<BookDto>> findBookByBookRating(String rating) {
+        logger.info("Started findBookByBookRating in BookController.");
+
+        try {
+            logger.info("findBookByBookRating " + SUCCESS);
+            return ResponseEntity.ok(bookMapper.mapToBookDtoList(bookService.findBookByBookRating(rating)));
+        } catch (ResponseStatusException | HttpServerErrorException e) {
+            logger.warn("findBookByBookRating " + FAILED);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, INVALID + e);
         }
     }

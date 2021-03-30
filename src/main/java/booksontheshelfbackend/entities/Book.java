@@ -1,5 +1,6 @@
 package booksontheshelfbackend.entities;
 
+import booksontheshelfbackend.enums.BookRatingEnum;
 import booksontheshelfbackend.enums.BookStatusEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -29,7 +30,12 @@ public class Book {
     private String comment;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private BookStatusEnum bookStatusEnum;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rating")
+    private BookRatingEnum bookRatingEnum;
 
     @Column(name = "withdrawn")
     private boolean withdrawn;
@@ -47,15 +53,17 @@ public class Book {
     public Book() {
     }
 
-    public Book(long id, String author, String title, long pages, String publisher, String comment, BookStatusEnum bookStatusEnum,
-                boolean withdrawn, Bookcase bookcase, Reader reader) {
+    public Book(long id, String author, String title, long pages, String publisher, String comment,
+                BookStatusEnum bookStatusEnum, BookRatingEnum bookRatingEnum, boolean withdrawn,
+                Bookcase bookcase, Reader reader) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.pages = pages;
-        this.publisher =  publisher;
+        this.publisher = publisher;
         this.comment = comment;
         this.bookStatusEnum = bookStatusEnum;
+        this.bookRatingEnum = bookRatingEnum;
         this.withdrawn = withdrawn;
         this.bookcase = bookcase;
         this.reader = reader;
@@ -87,6 +95,10 @@ public class Book {
 
     public BookStatusEnum getBookStatusEnum() {
         return bookStatusEnum;
+    }
+
+    public BookRatingEnum getBookRatingEnum() {
+        return bookRatingEnum;
     }
 
     public boolean isWithdrawn() {
@@ -127,6 +139,10 @@ public class Book {
 
     public void setBookStatusEnum(BookStatusEnum bookStatusEnum) {
         this.bookStatusEnum = bookStatusEnum;
+    }
+
+    public void setBookRatingEnum(BookRatingEnum bookRatingEnum) {
+        this.bookRatingEnum = bookRatingEnum;
     }
 
     public void setWithdrawn(boolean withdrawn) {

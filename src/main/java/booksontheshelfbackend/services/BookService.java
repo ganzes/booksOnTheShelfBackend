@@ -1,6 +1,7 @@
 package booksontheshelfbackend.services;
 
 import booksontheshelfbackend.entities.Book;
+import booksontheshelfbackend.enums.BookRatingEnum;
 import booksontheshelfbackend.enums.BookStatusEnum;
 import booksontheshelfbackend.repositories.BookRepository;
 import org.slf4j.Logger;
@@ -95,6 +96,40 @@ public class BookService {
         return bookRepository.save(updateBook);
     }
 
+    public Book changeBookRating(Book book, Long rating) {
+        logger.info("Started changeBookRating in BookService");
+
+        if (!bookRepository.existsById(book.getId())) {
+            return bookRepository.save(book);
+        }
+
+        Book updateBook = bookRepository.findById(book.getId()).orElseThrow();
+
+        if (rating == 1) {
+            updateBook.setBookRatingEnum(BookRatingEnum.ONE);
+        } else if (rating == 2) {
+            updateBook.setBookRatingEnum(BookRatingEnum.TWO);
+        } else if (rating == 3) {
+            updateBook.setBookRatingEnum(BookRatingEnum.THREE);
+        } else if (rating == 4) {
+            updateBook.setBookRatingEnum(BookRatingEnum.FOUR);
+        } else if (rating == 5) {
+            updateBook.setBookRatingEnum(BookRatingEnum.FIVE);
+        } else if (rating == 6) {
+            updateBook.setBookRatingEnum(BookRatingEnum.SIX);
+        } else if (rating == 7) {
+            updateBook.setBookRatingEnum(BookRatingEnum.SEVEN);
+        } else if (rating == 8) {
+            updateBook.setBookRatingEnum(BookRatingEnum.EIGHT);
+        } else if (rating == 9) {
+            updateBook.setBookRatingEnum(BookRatingEnum.NINE);
+        } else if (rating == 10) {
+            updateBook.setBookRatingEnum(BookRatingEnum.TEN);
+        }
+
+        return bookRepository.save(updateBook);
+    }
+
     public List<Book> findBookByStatus(String bookStatus) {
         logger.info("Started findBookByStatus in BookService");
 
@@ -135,6 +170,12 @@ public class BookService {
         logger.info("Started findBookByPublisher in BookService");
 
         return bookRepository.findBookByPublisher(publisher);
+    }
+
+    public List<Book> findBookByBookRating(String rating) {
+        logger.info("Started findBookByBookRating in BookService");
+
+        return bookRepository.findBookByBookRatingEnum(rating);
     }
 
 }

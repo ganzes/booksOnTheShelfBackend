@@ -29,6 +29,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBookByPublisher(String publisher);
 
+    List<Book> findBookByBookRatingEnum(String rating);
+
     @Override
     Optional<Book> findById(Long id);
 
