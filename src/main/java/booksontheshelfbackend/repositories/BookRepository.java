@@ -1,6 +1,8 @@
 package booksontheshelfbackend.repositories;
 
 import booksontheshelfbackend.entities.Book;
+import booksontheshelfbackend.enums.BookRatingEnum;
+import booksontheshelfbackend.enums.BookStatusEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Override
     List<Book> findAll();
 
-    List<Book> findBookByBookStatusEnum(String bookStatus);
+    List<Book> findBookByBookStatusEnum(BookStatusEnum bookStatusEnum);
 
     List<Book> findBookByWithdrawnIsTrue();
 
@@ -29,7 +31,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBookByPublisher(String publisher);
 
-    List<Book> findBookByBookRatingEnum(String rating);
+    List<Book> findBookByBookRatingEnum(BookRatingEnum bookRatingEnum);
 
     @Override
     Optional<Book> findById(Long id);

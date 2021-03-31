@@ -130,7 +130,7 @@ public class BookService {
         return bookRepository.save(updateBook);
     }
 
-    public List<Book> findBookByStatus(String bookStatus) {
+        public List<Book> findBookByStatus(BookStatusEnum bookStatus) {
         logger.info("Started findBookByStatus in BookService");
 
         return bookRepository.findBookByBookStatusEnum(bookStatus);
@@ -172,7 +172,7 @@ public class BookService {
         return bookRepository.findBookByPublisher(publisher);
     }
 
-    public List<Book> findBookByBookRating(String rating) {
+    public List<Book> findBookByBookRating(BookRatingEnum rating) {
         logger.info("Started findBookByBookRating in BookService");
 
         return bookRepository.findBookByBookRatingEnum(rating);

@@ -1,6 +1,8 @@
 package booksontheshelfbackend.controllers;
 
 import booksontheshelfbackend.dtos.BookDto;
+import booksontheshelfbackend.enums.BookRatingEnum;
+import booksontheshelfbackend.enums.BookStatusEnum;
 import booksontheshelfbackend.mappers.BookMapper;
 import booksontheshelfbackend.services.BookService;
 import org.slf4j.Logger;
@@ -154,7 +156,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/books{bookStatusEnum)}")
-    public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam String bookStatus) {
+    public ResponseEntity<List<BookDto>> findBookByStatus(@RequestParam BookStatusEnum bookStatus) {
         logger.info("Started findBookByStatus in BookController.");
 
         try {
@@ -245,7 +247,7 @@ public class BookController {
     }
 
     @GetMapping(value = "/findbookbyrating{rating}")
-    public ResponseEntity<List<BookDto>> findBookByBookRating(String rating) {
+    public ResponseEntity<List<BookDto>> findBookByBookRating(BookRatingEnum rating) {
         logger.info("Started findBookByBookRating in BookController.");
 
         try {
