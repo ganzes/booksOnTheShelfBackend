@@ -133,7 +133,6 @@ public class BookService {
                 updateBook.setBookRatingEnum(BookRatingEnum.NINE);
                 break;
             case 10:
-                updateBook.setBookRatingEnum(BookRatingEnum.NINE);
                 updateBook.setBookRatingEnum(BookRatingEnum.TEN);
                 break;
         }
