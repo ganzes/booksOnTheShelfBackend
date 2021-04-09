@@ -76,7 +76,7 @@ public class BookService {
         return bookRepository.count();
     }
 
-    public Book changeBookStatus(Book book, Long status) {
+    public Book changeBookStatus(Book book, int status) {
         logger.info("Started changeBookStatus in BookService");
 
         if (!bookRepository.existsById(book.getId())) {
@@ -96,7 +96,7 @@ public class BookService {
         return bookRepository.save(updateBook);
     }
 
-    public Book changeBookRating(Book book, Long rating) {
+    public Book changeBookRating(Book book, int rating) {
         logger.info("Started changeBookRating in BookService");
 
         if (!bookRepository.existsById(book.getId())) {
@@ -104,33 +104,44 @@ public class BookService {
         }
 
         Book updateBook = bookRepository.findById(book.getId()).orElseThrow();
-
-        if (rating == 1) {
-            updateBook.setBookRatingEnum(BookRatingEnum.ONE);
-        } else if (rating == 2) {
-            updateBook.setBookRatingEnum(BookRatingEnum.TWO);
-        } else if (rating == 3) {
-            updateBook.setBookRatingEnum(BookRatingEnum.THREE);
-        } else if (rating == 4) {
-            updateBook.setBookRatingEnum(BookRatingEnum.FOUR);
-        } else if (rating == 5) {
-            updateBook.setBookRatingEnum(BookRatingEnum.FIVE);
-        } else if (rating == 6) {
-            updateBook.setBookRatingEnum(BookRatingEnum.SIX);
-        } else if (rating == 7) {
-            updateBook.setBookRatingEnum(BookRatingEnum.SEVEN);
-        } else if (rating == 8) {
-            updateBook.setBookRatingEnum(BookRatingEnum.EIGHT);
-        } else if (rating == 9) {
-            updateBook.setBookRatingEnum(BookRatingEnum.NINE);
-        } else if (rating == 10) {
-            updateBook.setBookRatingEnum(BookRatingEnum.TEN);
+        switch (rating) {
+            case 1:
+                updateBook.setBookRatingEnum(BookRatingEnum.ONE);
+                break;
+            case 2:
+                updateBook.setBookRatingEnum(BookRatingEnum.TWO);
+                break;
+            case 3:
+                updateBook.setBookRatingEnum(BookRatingEnum.THREE);
+                break;
+            case 4:
+                updateBook.setBookRatingEnum(BookRatingEnum.FOUR);
+                break;
+            case 5:
+                updateBook.setBookRatingEnum(BookRatingEnum.FIVE);
+                break;
+            case 6:
+                updateBook.setBookRatingEnum(BookRatingEnum.SIX);
+                break;
+            case 7:
+                updateBook.setBookRatingEnum(BookRatingEnum.SEVEN);
+                break;
+            case 8:
+                updateBook.setBookRatingEnum(BookRatingEnum.EIGHT);
+                break;
+            case 9:
+                updateBook.setBookRatingEnum(BookRatingEnum.NINE);
+                break;
+            case 10:
+                updateBook.setBookRatingEnum(BookRatingEnum.NINE);
+                updateBook.setBookRatingEnum(BookRatingEnum.TEN);
+                break;
         }
 
         return bookRepository.save(updateBook);
     }
 
-        public List<Book> findBookByStatus(BookStatusEnum bookStatus) {
+    public List<Book> findBookByStatus(BookStatusEnum bookStatus) {
         logger.info("Started findBookByStatus in BookService");
 
         return bookRepository.findBookByBookStatusEnum(bookStatus);
